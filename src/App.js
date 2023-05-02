@@ -1,29 +1,40 @@
+import "./App.css";
+import Nav from "./components/navbar/Nav";
+import Head from "./components/Header/Head";
+import Home from "./components/home/Home";
+import Blog from "./components/home/Blog";
 
-import './App.css';
-import Nav from './components/navbar/Nav'
-import Head from './components/Header/Head'
-import Home from './components/home/Home'
-import Courses from './components/Courses/Courses';
 
-import Blog from './components/Blogs/Blog';
-
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Switch,
+} from "react-router-dom";
+import Footer from "./components/footer/Footer";
+import Contact from "./components/contact/Contact";
+import FAQ from "./components/Faq/FAQ";
+import Career from "./components/career/Career";
 function App() {
   return (
     <>
-   
-  <BrowserRouter>
-  <Nav/>
-  <Routes>
+      <Router>
+        <Head/>
+        <Nav/>
+         <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/faq" element={<FAQ  />} />
+        <Route exact path="/career" element={<Career />} />
+        
 
-
-  <Route exact path="/" element={<Home/>}/>
- 
-
-   </Routes>
-   <Courses/>
-   <Blog/>
-   </BrowserRouter>
+        </Routes>
+       
+        {/* <Home /> */}
+        
+        <Footer />
+        
+        </Router>
     </>
   );
 }
