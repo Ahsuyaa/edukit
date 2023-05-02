@@ -6,7 +6,7 @@ const About = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   return (
     <>
-      <section className="px-10 md:px-20 ">
+      <section className="px-10 md:px-20  mt-16 ">
         <div className="grid lg:grid-cols-2">
           <div className="mt-10   max-w-sm">
             <h3 className="text-3xl text-[#1a2649] font-semibold">
@@ -72,7 +72,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      <section className="bg-gradient-to-r from-blue-950 via-blue-900 to-blue   mt-24 ">
+      <section className="bg-gradient-to-r from-blue-950 via-blue-900 to-blue  mt-10 ">
         <div className="grid md:grid-cols-2 gap-4  p-24">
           <div className="text-white  ">
             <h1 className=" text-xl md:text-5xl mb-2 md:mb-4">

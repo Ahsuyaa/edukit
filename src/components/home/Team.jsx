@@ -46,7 +46,7 @@ const Team = () => {
                   {val.position}
                 </div>
               </div> */}
-              <div className="card mb-5 lg:mb-0">
+              <div className="card mb-5 ">
                 <div className="content">
                   <div className="back">
                     <div className="back-content">

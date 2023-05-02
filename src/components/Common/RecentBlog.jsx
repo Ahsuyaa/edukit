@@ -5,12 +5,12 @@ const RecentBlog = (props) => {
 
   return (
    <>
-     <div className=' hidden  md:inline-flex '>
-      <div className=''>
-        <img src={props.imgsrc}/> 
-      </div>
+     <div className='hidden md:grid grid-cols-2 '>
       <div>
-      <h5 className="text-xs font-bold tracking-tight text-gray-900 dark:text-white">
+        <img className='min-w-96'   src={props.imgsrc}/> 
+      </div>
+      <div >
+      <h5 className="text-xs font-bold tracking-tight text-gray-900 dark:text-white p-2">
       {props.title}
     </h5>
       </div>

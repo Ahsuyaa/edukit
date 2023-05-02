@@ -15,8 +15,8 @@ const Courses = () => {
           // title={val.title} duration={val.duration}
           return (
             <>
-              <div className=" shadow-lg">
-                <div className="  my-2 h-40  relative overflow-hidden object-fill shadow-md group ">
+              <div className=" ">
+                <div className="  my-2 h-40  relative overflow-hidden object-fill  group shadow-inner">
                  
                   <img className="w-full h-40" src={val.imgSrc} alt="" />
                   
@@ -41,12 +41,12 @@ const Courses = () => {
                     </button>
                   </div>
                 </div>
-                <div className="  lg:text-md md:text-sm sm:text-xs">
+                <div className="  lg:text-md md:text-sm sm:text-xs p-2">
                   <h3 className="text-[#1a2649] font-bold">{val.title}</h3> 
                   {/* <span>duration={val.duration}</span> */}
                 </div>
-                <div >
-                  <p>{val.description}</p> 
+                <div className="pb-2 px-2">
+                  <p >{val.description}</p> 
                   {/* <span>duration={val.duration}</span> */}
                 </div>
                 
