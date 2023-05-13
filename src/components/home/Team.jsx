@@ -2,7 +2,7 @@ import { Avatar, Button } from "flowbite-react";
 import TeamsData from "../../data/TeamsData";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./team.css";
+import "../teams/Teams";
 import {
   FaFacebook,
   FaInstagram,
@@ -22,12 +22,11 @@ const Team = () => {
   const displayedData = showMore ? data : data.slice(0, 4);
   return (
     <>
-      <div className="text-center text-3xl text-[#1a2649] font-semibold">
-        Our teams
-      </div>
+    <div className="mt-24 text-2xl text-[#1a2649] font-semibold text-center mb-2">Meet the Team </div>
+   <div className=" text-4xl text-center text-[#1a2649] font-semibold">Team Members </div>
       <div
         id="teamsid"
-        className=" grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center m-20 
+        className=" grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center m-20 
   "
       >
         {displayedData.map((val, ind) => {
@@ -97,6 +96,7 @@ const Team = () => {
         })}
       </div>
       <div className="flex justify-center">
+        <NavLink to="/teams">
         <Button
           className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br"
           onClick={handleToggle}
@@ -104,6 +104,7 @@ const Team = () => {
           {" "}
           {showMore ? "Show Less" : "Show More"}
         </Button>
+        </NavLink>
       </div>
     </>
   );

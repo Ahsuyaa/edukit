@@ -24,23 +24,24 @@ const Nav = () => {
     };
   }, []);
 
-  const navbarClasses = `z-50  w-full h-[100px] flex justify-between items-center md:px-2 bg-[#1a2649]   ${
+  const navbarClasses = `z-50  w-full h-[100px] flex justify-between items-center md:px-2 bg-[#050a30]   ${
     isSticky ? "fixed top-0 w-full" : ""
   }`;
 
   return (
     <>
       <div className={navbarClasses}>
+        <NavLink to="/">
         <div>
           <img src={Logo} alt="" style={{ width: "100px" }} />
         </div>
+        </NavLink>
         <div>
-          <ul className=" hidden md:flex flex px-2 py-2 text-white">
+          <ul className=" hidden md:flex  px-2 py-2 text-white font-bold text-sm lg:text-lg">
             <li className="m-5">
               <NavLink to={"/"}>Home</NavLink>
             </li>
             <li className="m-5">
-              {" "}
               <NavLink to="/trainings">Trainings </NavLink>
             </li>
             <li className="m-5">
@@ -55,21 +56,27 @@ const Nav = () => {
             </li>
             <li className="m-5">
               {" "}
-              <NavLink to="/blog">Blog </NavLink>
+              <NavLink to="/blogs">Blog </NavLink>
             </li>
             <li className="m-5">
               <NavLink to={"/contact"}>Contact Us</NavLink>
             </li>
           </ul>
         </div>
-        <div className="hidden md:flex ">
+        <div className="hidden md:flex lg:ml-36 ">
           {/* <button type="button" className="text-white bg-blue-700 hover:bg-blue-800
        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5
         mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:
         focus:ring-blue-800 md:py-1 md:px-2 md:text-xs lg:px-4 lg:py-2 lg:text-sm">Send Enquiry</button> */}
-          <div className="group">
-            <Button className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br" outline={true}>
-              Send Query
+          <div className="group ">
+          <NavLink to={"/contact"} >
+            <Button
+              className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br "
+              outline={true}
+            >
+              
+               Send Query
+            
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -85,6 +92,7 @@ const Nav = () => {
                 />
               </svg>
             </Button>
+            </NavLink>
           </div>
         </div>
         <div
@@ -98,42 +106,56 @@ const Nav = () => {
             className={
               !nav
                 ? "hidden"
-                : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center z-10 "
+                : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center z-20  "
             }
           >
-            <li className="py-2 text-4xl text-white">Home</li>
-            <li className="py-2 text-4xl text-white">Training</li>
-            <li className="py-2 text-4xl text-white">
-              <Link to="/#teamsid">Teams</Link>
+            <li className=" text-2xl text-white py-2">
+              {" "}
+              <NavLink to={"/"} onClick={handleClick}>Home</NavLink>
             </li>
-            <li className="py-2 text-4xl text-white">FAQ</li>
-            <li className="py-2 text-4xl text-white">Career</li>
-            <li className="py-2 text-4xl text-white">Blogs</li>
-            <li className="py-2 text-4xl text-white">
-              <NavLink to={"/contact"}>Contact Us</NavLink>
+            <li className=" text-2xl text-white py-2">
+              {" "}
+              <NavLink to="/trainings" onClick={handleClick}>
+                Trainings{" "}
+              </NavLink>
+            </li>
+            <li className="text-2xl text-white py-2">
+              <NavLink to="/teams" onClick={handleClick}>
+                Teams
+              </NavLink>
+            </li>
+            <li className="text-2xl text-white py-2">
+              {" "}
+              <NavLink to="/faq" onClick={handleClick}>
+                FAQ{" "}
+              </NavLink>
+            </li>
+            <li className="text-2xl text-white py-2">
+              <NavLink to="/career" onClick={handleClick}>
+                Career{" "}
+              </NavLink>
+            </li>
+            <li className=" text-2xl text-white py-2">
+              {" "}
+              <NavLink to="/blogs" onClick={handleClick}>
+                Blog{" "}
+              </NavLink>
+            </li>
+            <li className=" text-2xl text-white py-2">
+              <NavLink to={"/contact"} onClick={handleClick} >
+                Contact Us
+              </NavLink>
             </li>
 
             {/* <button type="button" className="text-white bg-blue-700 hover:bg-blue-800
            focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5
         mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:
         focus:ring-blue-800  ">Send Enquiry</button> */}
-            <Button gradientMonochrome="failure">
-              Send query
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </Button>
+             <div className=" mt-5 ">
+      <Button className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br"> <NavLink to={"/contact"} onClick={handleClick}>
+                Send query
+              </NavLink></Button>
+    </div>
           </ul>
         </div>
       </div>

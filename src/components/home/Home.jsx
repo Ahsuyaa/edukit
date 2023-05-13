@@ -9,12 +9,13 @@ import About from './About';
 import Blog from './Blog';
 import Testimonials from './Testimonials';
 import Team from './Team'
+import EduKit from './EduKit'
 
 const Home = () => {
   return (
   <>
  
-  <div className="w-100 h-[300px]  sm:h-[400px]  md:h-[600px] 2xl:h-[800px] homeC">
+  <div className="w-100 h-[200px]  sm:h-[400px]  md:h-[500px] 2xl:h-[800px] ">
   <Carousel>
     <img 
       src={Home1}
@@ -37,6 +38,7 @@ const Home = () => {
 < Blog/>
 <About/>
 <Testimonials/>
+<EduKit/>
 < Team/>
   </>
   )

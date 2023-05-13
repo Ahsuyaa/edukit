@@ -1,11 +1,28 @@
 import { Button } from "flowbite-react";
 import React from "react";
 import { FaMailBulk, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import contact from "../../images/contact.png";
+import "../component.css";
+import { NavLink } from "react-router-dom";
 const Contact = () => {
   return (
     <>
-      <div class="grid grid-cols-2  gap-4 px-10">
-        <div className="mt-24 shadow-xl rounded ">
+      <div className="relative  bg-slate-950 ">
+        <img src={contact} alt="My Image" className="w-full h-56 opacity-25" />
+        <div className="absolute top-0 flex m-10 ">
+          <NavLink to="/">
+            <h1 className="mr-2 text-gray-400">Home /</h1>
+          </NavLink>
+          <h1 className=" text-white">Contact Us</h1>
+        </div>
+        <div className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 z-10 rounded-md p-4">
+          <p className="text-white text-center text-sm md:text-4xl font-bold animate-ping  temporary-spin">
+            Get in Touch with us{" "}
+          </p>
+        </div>
+      </div>
+      <div class="grid  lg:grid-cols-2  gap-4 px-10 ">
+        <div className="mt-10 shadow-xl rounded ">
           <div className="p-4 ">
             <label>
               Name <span className="text-red-600 ">*</span>
@@ -49,33 +66,49 @@ const Contact = () => {
             />
           </div>
           <div className="flex justify-center mb-10">
-            <Button gradientMonochrome="failure"> Submit</Button>
+            <Button className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br">
+              {" "}
+              Submit
+            </Button>
           </div>
         </div>
 
-        <div className="mt-32  text-xl text-justify ">
-          <h1 className="font-bold"> Edu Kit</h1>
+        <div className="mt-10  text-xl text-justify bg-gradient-to-r from-blue-300 via-blue-50 to-blue-200 ">
+          <h1 className="font-bold m-5"> Edu Kit</h1>
           <div className="flex display-flex p-5  m-2">
-            <FaMapMarkerAlt /> <p className="ml-2">hriganesh Marg, imadol, gwarkhu, lalitpur 44600,
-            Nepal</p>
+            <FaMapMarkerAlt />{" "}
+            <p className="ml-2">
+              hriganesh Marg, imadol, gwarkhu, lalitpur 44600, Nepal
+            </p>
           </div>
           <div className="flex display-flex p-5  justify-content m-2 ">
-            <FaPhoneAlt /> <p className="ml-2">+977-1-4117578 / 4111849 / 4111583 / 5912405
-            9841002000 / 9808724535</p>
-          </div>
-          <div className="flex display-flex p-5 justify-content m-2 ">
-            <FaPhoneAlt /> <p className="ml-2">Departments: <br />
-            Inquiry Hotline : 9841002000 <br />
-            Feedback / Follow-up : 9847396294 <br /> Account : 9847396295 <br />{" "}
-            HR : 9841904562 <br />
-            Client Relation : 9840680858
+            <FaPhoneAlt />{" "}
+            <p className="ml-2">
+              +977-1-4117578 / 4111849 / 4111583 / 5912405 9841002000 /
+              9808724535
             </p>
           </div>
           <div className="flex display-flex p-5 justify-content m-2 ">
-            <FaMailBulk /> <p className="ml-2"> info@kitwosd.com <br />
-            info@kitwosd.com<br />
-            info@kitwosd.com<br />info@kitwosd.com<br/>
-           
+            <FaPhoneAlt />{" "}
+            <p className="ml-2">
+              Departments: <br />
+              Inquiry Hotline : 9841002000 <br />
+              Feedback / Follow-up : 9847396294 <br /> Account : 9847396295{" "}
+              <br /> HR : 9841904562 <br />
+              Client Relation : 9840680858
+            </p>
+          </div>
+          <div className="flex display-flex p-5 justify-content m-2 ">
+            <FaMailBulk />{" "}
+            <p className="ml-2">
+              {" "}
+              info@kitwosd.com <br />
+              info@kitwosd.com
+              <br />
+              info@kitwosd.com
+              <br />
+              info@kitwosd.com
+              <br />
             </p>
           </div>
         </div>

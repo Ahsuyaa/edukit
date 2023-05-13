@@ -6,6 +6,7 @@ import Testimonial from "../../data/Testimonial";
 // import required modules
 import { Button, Card } from "flowbite-react";
 import "./all.css";
+
 const Testimonials = ({ testimonials }) => {
   const settings = {
     dots: true,
@@ -32,22 +33,22 @@ const Testimonials = ({ testimonials }) => {
   return (
     
   <>
-   <div className="mt-24  text-3xl text-center text-[#1a2649] font-semibold">Our Testimonials </div>
+
+  <div className="mt-24 text-2xl text-[#1a2649] font-semibold text-center mb-2">What our student says </div>
+   <div className=" text-4xl text-center text-[#1a2649] font-semibold">Our Testimonials </div>
     <Slider {...settings}>
       {/* Loop through testimonials data and render each testimonial as a slide */}
       {Testimonial.map((testimonials) => (
-        <div className="testimonial-card   p-10 " key={testimonials.id}>
-          <div className="grid grid-cols-2 gap-5">
+        <div className="testimonial-card   p-10 bg-slate-100  mt-10" key={testimonials.id}>
+          <div className="grid md:grid-cols-2 gap-5">
             <div>
               <img className="w-full h-40 object-cover" src={testimonials.imgsrc} alt="..." />
             </div>
             <div>
-              <h4>{testimonials.name}</h4>
+              <h4 className="mb-2 text-[#1a2649] font-bold">{testimonials.name}</h4>
               <p className="text-justify mr-5">
-                {testimonials.company}
-                Your commitment, passion, and delivery were really amazing. We
-                had a great start and the speed as well as intensity with which
-                we rolled out globally over 3 years was unbelievable.{" "}
+                {testimonials.description}
+               
               </p>
             </div>
           </div>

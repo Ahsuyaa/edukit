@@ -5,23 +5,26 @@ import CommonCard from '../Common/CommonCard'
 import Bdata from '../../data/Bdata'
 import Rdata from "../../data/Rdata"
 import RecentBlog from '../Common/RecentBlog'
+import { NavLink } from 'react-router-dom'
 
 const Blog = () => {
   return (
 
     <>
-    <div className="  mt-10 mb-10 md:mt-24   text-3xl text-center text-[#1a2649] font-semibold">
-       Our  Blog
-      </div>
-   <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-10 md:px-20  ">
+   
+   <div className=" mt-24 text-4xl text-center text-[#1a2649] font-semibold">Blogs </div>
+   <div className="mt-10 grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-10 md:px-20  ">
      
         {
           Bdata.map((val,ind)=>
           {
+            if(ind<2)
+            {
             return <CommonCard key={ind}
              imgsrc={val.imgSrc}
           
               description={val.description}/>
+            }
           }
           )
         }
@@ -41,7 +44,9 @@ const Blog = () => {
       
     </div>
     <div className='flex justify-center mt-14'>
+      <NavLink to="/blogs">
     <Button className='bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br' >View All</Button>
+    </NavLink>
     </div>
     </>
   )

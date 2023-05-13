@@ -5,9 +5,9 @@ const RecentBlog = (props) => {
 
   return (
    <>
-     <div className='hidden md:grid grid-cols-2 '>
+     <div className='hidden md:grid grid-cols-2 gap-0'>
       <div>
-        <img className='min-w-96'   src={props.imgsrc}/> 
+        <img className='w-full h-24'   src={props.imgsrc}/> 
       </div>
       <div >
       <h5 className="text-xs font-bold tracking-tight text-gray-900 dark:text-white p-2">

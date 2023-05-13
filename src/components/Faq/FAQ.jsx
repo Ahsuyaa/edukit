@@ -1,140 +1,81 @@
-import React from "react";
-import "../../../node_modules/flowbite/dist/flowbite.js";
-import "../../../node_modules/flowbite/dist/flowbite.css";
-import { Accordion } from "flowbite-react";
+import React, { useState } from 'react';
 import faq from "../../images/faq.png"
+import { NavLink } from 'react-router-dom';
 
 const FAQ = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const items = [
+    {
+      title: 'Item 1',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    },
+    {
+      title: 'Item 2',
+      content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+      title: 'Item 3',
+      content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+     {
+      title: 'Item 4',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    },
+    {
+      title: 'Item 6',
+      content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+      title: 'Item 2',
+      content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+  ];
+
+  const handleClick = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <>
-   <div className="relative  bg-slate-950 ">
-  <img src={faq} alt="My Image" className="w-full h-44 opacity-25" />
-  <div className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 z-10 rounded-md p-4">
-    <p className="text-white text-center text-4xl font-bold">Frequently Asked Questions</p>
+    <div className="relative  bg-slate-950 ">
+    <img src={faq} alt="My Image" className="w-full h-56 opacity-25" />
+    <div className="absolute top-0 flex m-10 ">
+          <NavLink to="/">
+          <h1 className="mr-2 text-gray-400">Home /</h1>
+          </NavLink>
+      <h1 className=" text-white">FAQ</h1>
+      </div>
+    <div className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 z-10 rounded-md p-4">
+      <p className="text-white text-center text-sm md:text-4xl font-bold animate-ping temporary-spin ">Frequently Asked Questions</p>
+    </div>
   </div>
-</div>
-
-      <div className="mt-24 flex justify-center"> 
-      <Accordion alwaysOpen={true}>
-  <Accordion.Panel>
-    <Accordion.Title>
-      What is Flowbite?
-    </Accordion.Title>
-    <Accordion.Content>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.
-      </p>
-      <p className="text-gray-500 dark:text-gray-400">
-        Check out this guide to learn how to
-        <a
-          href="https://flowbite.com/docs/getting-started/introduction/"
-          className="text-blue-600 hover:underline dark:text-blue-500"
-        >
-          get started
-        </a>
-         and start developing websites even faster with components on top of Tailwind CSS.
-      </p>
-    </Accordion.Content>
-  </Accordion.Panel>
-  <Accordion.Panel>
-    <Accordion.Title>
-      Is there a Figma file available?
-    </Accordion.Title>
-    <Accordion.Content>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.
-      </p>
-      <p className="text-gray-500 dark:text-gray-400">
-        Check out the 
-        <a
-          href="https://flowbite.com/figma/"
-          className="text-blue-600 hover:underline dark:text-blue-500"
-        >
-          Figma design system
-        </a>
-         based on the utility classes from Tailwind CSS and components from Flowbite.
-      </p>
-    </Accordion.Content>
-  </Accordion.Panel>
-  <Accordion.Panel>
-    <Accordion.Title>
-      What are the differences between Flowbite and Tailwind UI?
-    </Accordion.Title>
-    <Accordion.Content>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.
-      </p>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.
-      </p>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        Learn more about these technologies:
-      </p>
-      <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
-        <li>
-          <a
-            href="https://flowbite.com/pro/"
-            className="text-blue-600 hover:underline dark:text-blue-500"
+    <div className="  max-w-lg mx-auto mt-10">
+      {items.map((item, index) => (
+        <div key={index} className="border-b border-gray-400">
+          <button
+            className="flex items-center justify-between w-full p-4 text-left focus:outline-none"
+            onClick={() => handleClick(index)}
           >
-            Flowbite Pro
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://tailwindui.com/"
-            rel="nofollow"
-            className="text-blue-600 hover:underline dark:text-blue-500"
-          >
-            Tailwind UI
-          </a>
-        </li>
-      </ul>
-    </Accordion.Content>
-  </Accordion.Panel>
-  <Accordion.Panel>
-    <Accordion.Title>
-      What is Flowbite?
-    </Accordion.Title>
-    <Accordion.Content>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.
-      </p>
-      <p className="text-gray-500 dark:text-gray-400">
-        Check out this guide to learn how to
-        <a
-          href="https://flowbite.com/docs/getting-started/introduction/"
-          className="text-blue-600 hover:underline dark:text-blue-500"
-        >
-          get started
-        </a>
-         and start developing websites even faster with components on top of Tailwind CSS.
-      </p>
-    </Accordion.Content>
-  </Accordion.Panel>
-  <Accordion.Panel>
-    <Accordion.Title>
-      What is Flowbite?
-    </Accordion.Title>
-    <Accordion.Content>
-      <p className="mb-2 text-gray-500 dark:text-gray-400">
-        Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.
-      </p>
-      <p className="text-gray-500 dark:text-gray-400">
-        Check out this guide to learn how to
-        <a
-          href="https://flowbite.com/docs/getting-started/introduction/"
-          className="text-blue-600 hover:underline dark:text-blue-500"
-        >
-          get started
-        </a>
-         and start developing websites even faster with components on top of Tailwind CSS.
-      </p>
-    </Accordion.Content>
-  </Accordion.Panel>
-</Accordion>
-</div>
+            <span className="font-medium">{item.title}</span>
+            <span className={`transform transition-transform ${activeIndex === index ? 'rotate-180' : 'rotate-0'}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-6 w-6">
+                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+              </svg>
+            </span>
+          </button>
+          <div className={`p-4 ${activeIndex === index ? 'block' : 'hidden'}`}>
+            <p>{item.content}</p>
+          </div>
+        </div>
+      ))}
+    </div>
     </>
   );
 };
 
 export default FAQ;
+
+
+
+

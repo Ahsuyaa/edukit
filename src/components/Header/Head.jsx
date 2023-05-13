@@ -1,5 +1,6 @@
 import React from 'react'
 import {FaCode, FaFacebook,FaInstagram,FaLinkedinIn,FaPhone,FaPhoneAlt,FaTwitter, FaViber}  from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 const head = () => {
   return (
    <>
@@ -16,8 +17,9 @@ const head = () => {
             <i className='icon  text-blue-500 mr-5 md:text-lg '><FaTwitter/></i>
             <i className='icon text-purple-600 mr-5 md:text-lg '><FaViber/></i>
             <i className='icon  text-blue-500 mr-5 md:text-lg '><FaLinkedinIn/></i>
+            <NavLink to="/contact">
             <p className='text-red-700 text-center md:text-sm mr-5 '>Apply Online</p>
-          
+            </NavLink>
         </div>
  
  
