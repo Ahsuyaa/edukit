@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; // Import carousel styles
 import "slick-carousel/slick/slick-theme.css";
@@ -8,6 +8,25 @@ import { Button, Card } from "flowbite-react";
 import "./all.css";
 
 const Testimonials = ({ testimonials }) => {
+  let API = "https://pdeng.valleyhomecareservice.com/api/testimonials";
+  const [lists, setLists] = useState([]);
+ 
+
+  useEffect(() => {
+   
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch(API);
+      
+        const data = await response.json();
+        setLists(data.data.testimonials);
+        // console.log(data);
+      } catch (error) {
+        console.log("Error fetching testimonials:", error);
+      }
+    };
+    fetchTestimonials();
+  }, []);
   const settings = {
     dots: true,
     arrows: false,
@@ -38,11 +57,11 @@ const Testimonials = ({ testimonials }) => {
    <div className=" text-4xl text-center text-[#1a2649] font-semibold">Our Testimonials </div>
     <Slider {...settings}>
       {/* Loop through testimonials data and render each testimonial as a slide */}
-      {Testimonial.map((testimonials) => (
+      {lists.map((testimonials) => (
         <div className="testimonial-card   p-10 bg-slate-100  mt-10" key={testimonials.id}>
           <div className="grid md:grid-cols-2 gap-5">
             <div>
-              <img className="w-full h-40 object-cover" src={testimonials.imgsrc} alt="..." />
+              <img className="w-full h-40 object-cover" src={`https://pdeng.valleyhomecareservice.com/storage/${testimonials.image.url}`} alt="..." />
             </div>
             <div>
               <h4 className="mb-2 text-[#1a2649] font-bold">{testimonials.name}</h4>

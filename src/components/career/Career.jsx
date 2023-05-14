@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import career from "../../images/career.png";
 import CareerCard from "../Common/CareerCard";
 import CareerData from "../../data/CareerData";
 import "../component.css"
 import { NavLink } from "react-router-dom";
 const Career = () => {
+  let API = "https://pdeng.valleyhomecareservice.com/api/vacancies";
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+   
+
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(API);
+
+        const data = await response.json();
+        
+        setLists(data.data.vacancies);
+        console.log(data)
+      } catch (error) {
+        console.log("Error fetching blogs:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
   return (
+    
     <>
       <div className="relative  bg-slate-950 ">
         <img src={career} alt="My Image" className="w-[75%] h-56 opacity-25" />
@@ -23,13 +44,13 @@ const Career = () => {
       </div>
       <div className="text-center text-bold text-4xl mt-10">Our Vacancy</div>
       <div className=" grid sm:grid-cols-2 lg:grid-cols-3 shadow-white">
-        {CareerData.map((val, ind) => {
+        {lists.map((val, ind) => {
           return (
             <CareerCard
               key={ind}
               title={val.title}
               time={val.time}
-              level={val.level}
+              level={val.job_type}
               salary={val.salary}
             />
           );

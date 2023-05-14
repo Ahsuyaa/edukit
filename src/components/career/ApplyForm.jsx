@@ -5,7 +5,7 @@ const ApplyForm = ({ visible ,onClose}) => {
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-      <div className="bg-white p-2 rounded h-96 w-auto overflow-y-auto ">
+      <div className="bg-white p-2 rounded h-auto overflow-y-auto ">
         <div className=" shadow-xl rounded ">
             <div className="flex justify-end mr-5 text-xl">
                 

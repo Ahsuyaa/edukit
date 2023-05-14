@@ -1,6 +1,6 @@
 import { Avatar, Button } from "flowbite-react";
 import TeamsData from "../../data/TeamsData";
-import React, { useState } from "react";
+import React, { useEffect, useState, } from "react";
 import { NavLink } from "react-router-dom";
 import "../teams/Teams";
 import {
@@ -12,14 +12,33 @@ import {
 } from "react-icons/fa";
 
 const Team = () => {
-  const [data, setData] = useState([...TeamsData]);
+  let API = "https://pdeng.valleyhomecareservice.com/api/teams";
+  const [lists, setLists] = useState([]);
+ 
+
+  useEffect(() => {
+   
+    const fetchTeams = async () => {
+      try {
+        const response = await fetch(API);
+      
+        const data = await response.json();
+        setLists(data.data.teams);
+        // console.log(data);
+      } catch (error) {
+        console.log("Error fetching blogs:", error);
+      }
+    };
+    fetchTeams();
+  }, []);
+  // const [data, setData] = useState([...TeamsData]);
   const [showMore, setShowMore] = useState(false);
   const handleToggle = (e) => {
-    console.log(data);
+    // console.log(data);
 
     setShowMore(!showMore); // Toggle show more state
   };
-  const displayedData = showMore ? data : data.slice(0, 4);
+  // const displayedData = showMore ? data : data.slice(0, 4);
   return (
     <>
     <div className="mt-24 text-2xl text-[#1a2649] font-semibold text-center mb-2">Meet the Team </div>
@@ -29,7 +48,7 @@ const Team = () => {
         className=" grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center m-20 
   "
       >
-        {displayedData.map((val, ind) => {
+        {lists.map((val, ind) => {
           return (
             <>
               {/* <div className="mt-10 md:mt-24">
@@ -49,7 +68,7 @@ const Team = () => {
                 <div className="content">
                   <div className="back">
                     <div className="back-content">
-                      <img src={val.imgsrc} />
+                      <img src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`} />
                     </div>
                   </div>
                   <div className="front">
@@ -99,10 +118,9 @@ const Team = () => {
         <NavLink to="/teams">
         <Button
           className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br"
-          onClick={handleToggle}
+          
         >
-          {" "}
-          {showMore ? "Show Less" : "Show More"}
+      View ALL
         </Button>
         </NavLink>
       </div>

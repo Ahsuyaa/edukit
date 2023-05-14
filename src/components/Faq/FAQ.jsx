@@ -1,36 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import faq from "../../images/faq.png"
 import { NavLink } from 'react-router-dom';
 
 const FAQ = () => {
+
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const items = [
-    {
-      title: 'Item 1',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-      title: 'Item 2',
-      content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      title: 'Item 3',
-      content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-     {
-      title: 'Item 4',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-      title: 'Item 6',
-      content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      title: 'Item 2',
-      content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-  ];
+  let API = "https://pdeng.valleyhomecareservice.com/api/faqs";
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(API);
+
+        const data = await response.json();
+
+        setLists(data.data.faqs);
+        console.log(data);
+      } catch (error) {
+        console.log("Error fetching blogs:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
+  const limitCharacters = 100;
 
   const handleClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -51,7 +45,7 @@ const FAQ = () => {
     </div>
   </div>
     <div className="  max-w-lg mx-auto mt-10">
-      {items.map((item, index) => (
+      {lists.map((item, index) => (
         <div key={index} className="border-b border-gray-400">
           <button
             className="flex items-center justify-between w-full p-4 text-left focus:outline-none"

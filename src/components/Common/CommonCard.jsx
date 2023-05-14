@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "flowbite-react";
 import Logo from "../../images/logo.png";
 const CommonCard = (props) => {
-  
+  const limitCharacters = 100;
   return (
     <>
       <div className=" shadow-md ">
@@ -12,7 +12,7 @@ const CommonCard = (props) => {
         </h3>
 
         <p className="  dark:text-white p-2">
-          {props.description}
+        <p  dangerouslySetInnerHTML={{ __html: props.description.slice(0,limitCharacters) }}></p>
         </p>
       </div>
     </>

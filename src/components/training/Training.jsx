@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import trainingImg from "../../images/training.png";
 import CourseData from "../../data/CourseData";
 import "../component.css"
 
 import { NavLink } from "react-router-dom";
 const Training = () => {
+  let API = "https://pdeng.valleyhomecareservice.com/api/courses";
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    console.log('effect called');
+
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(API);
+
+        const data = await response.json();
+        
+        setLists(data.data.courses);
+      } catch (error) {
+        console.log("Error fetching blogs:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
+  const limitCharacters = 100;
   return (
     <>
     
@@ -27,7 +47,7 @@ const Training = () => {
         </div>
       </div>
       <div className=" mx-10 md:mx-20 grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 sm:gap-8 md:gap-8 mt-10">
-        {CourseData.map((val, ind) => {
+        {lists.map((val, ind) => {
           // key={ind}
           // title={val.title} duration={val.duration}
           return (
@@ -35,7 +55,7 @@ const Training = () => {
               <div>
               <div className="  my-6 sm:my-2 h-40  relative overflow-hidden object-fill  group shadow-inner  hover:scale-110">
                  
-                 <img className="w-full h-40" src={val.imgSrc} alt="" />
+                 <img className="w-full h-40" src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`} alt="" />
                  <NavLink to={'/learnmore'}>
                  <div className="absolute inset-0 hidden group-hover:block hover:bg-cyan-400/80   transition-all duration-200 ">
                  <div className="flex items-center justify-center text-xl">
@@ -66,7 +86,7 @@ const Training = () => {
                  {/* <span>duration={val.duration}</span> */}
                </div>
                <div className="pb-2 px-2">
-                 <p >{val.description}</p> 
+                 <p dangerouslySetInnerHTML={{ __html: val.description.slice(0,limitCharacters) }}></p> 
                  {/* <span>duration={val.duration}</span> */}
                </div>
                 <div className="">
