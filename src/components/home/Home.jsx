@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from "../../images/logo.png"
 import { Carousel } from 'flowbite-react'
 import Home1 from '../../images/home1.png'
@@ -12,27 +12,45 @@ import Team from './Team'
 import EduKit from './EduKit'
 
 const Home = () => {
+  let API = "https://pdeng.valleyhomecareservice.com/api/slides";
+  const [lists, setLists] = useState([]);
+  
+
+  useEffect(() => {
+    const fetchSlider = async () => {
+      try {
+        const response = await fetch(API);
+
+        const data = await response.json();
+       
+        setLists(data);
+        console.log(data)
+      } catch (error) {
+        console.log("Error fetching slider:", error);
+      }
+    };
+    fetchSlider();
+    
+  }, []);
   return (
   <>
- 
-  <div className="w-100 h-[200px]  sm:h-[400px]  md:h-[500px] 2xl:h-[800px] ">
-  <Carousel>
+    <div className="w-100 h-[200px]  sm:h-[400px]  md:h-[500px] 2xl:h-[800px] ">
+
+  {/* <Carousel>
+ {lists.image.map((val, ind) => {
     <img 
-      src={Home1}
+      src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`}
       alt="..."
     />
-    <img
-      src={Home2}
-      alt="..."
-    />
-    <img
-      src={Home3}
-      alt="..."
-    />
+
    
    
-  </Carousel>
-</div>
+  })}
+  </Carousel> */}
+ </div>
+
+
+ 
 <Courses/>
 
 < Blog/>

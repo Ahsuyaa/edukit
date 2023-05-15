@@ -11,22 +11,24 @@ const Career = () => {
   useEffect(() => {
    
 
-    const fetchCourses = async () => {
+    const fetchVacancy = async () => {
       try {
         const response = await fetch(API);
 
         const data = await response.json();
         
         setLists(data.data.vacancies);
-        console.log(data)
+        console.log(lists)
       } catch (error) {
-        console.log("Error fetching blogs:", error);
+        console.log("Error fetching vaccancy:", error);
       }
     };
-    fetchCourses();
+    fetchVacancy();
   }, []);
+
+
   return (
-    
+  
     <>
       <div className="relative  bg-slate-950 ">
         <img src={career} alt="My Image" className="w-[75%] h-56 opacity-25" />
@@ -45,13 +47,53 @@ const Career = () => {
       <div className="text-center text-bold text-4xl mt-10">Our Vacancy</div>
       <div className=" grid sm:grid-cols-2 lg:grid-cols-3 shadow-white">
         {lists.map((val, ind) => {
+           const level1 =()=>
+           {
+             if(val.job_level.choice==="1")
+             {
+              return <p>senior</p>
+             }
+             else if(val.job_level==="2")
+             {
+              return <p>mid level</p>
+             }
+             else
+             {
+              return <p>internship</p>
+             }
+           }
+           const type1 =()=>
+           {
+             if(val.job_type==="1")
+             {
+              return <p>Full  Time</p>
+             }
+             
+             else
+             {
+              return <p>Half Time</p>
+             }
+           }
+           const salary1=()=>
+           {
+             if(val.offered_salary==="1")
+             {
+              return <p>Negotiable</p>
+             }
+             
+             else
+             {
+              return <p>fixed</p>
+             }
+           }
           return (
             <CareerCard
               key={ind}
               title={val.title}
-              time={val.time}
-              level={val.job_type}
-              salary={val.salary}
+              time={type1()}
+              level={level1()}
+              salary={salary1()
+              }
             />
           );
         })}

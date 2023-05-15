@@ -14,17 +14,17 @@ const About = () => {
         const response = await fetch(API);
 
         const data = await response.json();
-          about_us=data;
-        // setLists(data.data.about);
-        // console.log(about_us.data.about);
+          // about_us=data;
+        setLists(data.data.about);
+        // console.log(data);
       } catch (error) {
-        console.log("Error fetching blogs:", error);
+        console.log("Error fetching about:", error);
       }
     };
     fetchAbout();
-    console.log(lists);
+    // console.log(lists);
   }, []);
-  const limitCharacters = 1000;
+  const limitCharacters = 100;
   return (
     <>
       <section className="bg-gradient-to-r from-blue-950 via-blue-900 to-blue  mt-24 ">
@@ -34,12 +34,30 @@ const About = () => {
               Why to choose Edu kit?
             </h1>
             <hr />
-            {/* <p  dangerouslySetInnerHTML={{ __html: about_us.data.about.description.slice(0,limitCharacters) }}></p> */}
+            {lists ? (
+        <div>
+          
+          <p  dangerouslySetInnerHTML={{ __html: lists.description}}></p>
+        </div>
+      ) : (
+        <p>Loading data...</p>
+      )}
+          
+        
+           
             
           </div>
 
-          <div className="my-10 md:my-24">
-            {/* <img src={`https://pdeng.valleyhomecareservice.com/storage/${lists.about.image.url}`}/> */}
+          <div className="my-10 md:my-24 ">
+           
+            {lists.image ? (
+        <div>
+          
+          <img  className="w-full" src={`https://pdeng.valleyhomecareservice.com/storage/${lists.image.url}`}/>
+        </div>
+      ) : (
+        <p>Loading img...</p>
+      )}
           </div>
         </div>
       </section>

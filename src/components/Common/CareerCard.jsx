@@ -3,7 +3,7 @@ import { FaMoneyBill } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const CareerCard = (props) => {
-  return (
+return (
     <>
       <div className="h-40 text-center m-10 shadow-2xl  hover:scale-110 ">
         
