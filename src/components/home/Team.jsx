@@ -26,18 +26,18 @@ const Team = () => {
         setLists(data.data.teams);
         // console.log(data);
       } catch (error) {
-        console.log("Error fetching blogs:", error);
+        console.log("Error fetching teams:", error);
       }
     };
     fetchTeams();
   }, []);
   // const [data, setData] = useState([...TeamsData]);
-  const [showMore, setShowMore] = useState(false);
-  const handleToggle = (e) => {
+  // const [showMore, setShowMore] = useState(false);
+  // const handleToggle = (e) => {
     // console.log(data);
 
-    setShowMore(!showMore); // Toggle show more state
-  };
+    // setShowMore(!showMore); // Toggle show more state
+  
   // const displayedData = showMore ? data : data.slice(0, 4);
   return (
     <>
@@ -126,6 +126,7 @@ const Team = () => {
       </div>
     </>
   );
-};
+      
+      };
 
 export default Team;

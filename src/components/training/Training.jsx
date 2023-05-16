@@ -9,8 +9,6 @@ const Training = () => {
   const [lists, setLists] = useState([]);
 
   useEffect(() => {
-    console.log('effect called');
-
     const fetchCourses = async () => {
       try {
         const response = await fetch(API);

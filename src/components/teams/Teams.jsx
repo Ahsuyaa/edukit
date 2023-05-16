@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./teams.css"
 import { FaFacebook, FaInstagram, FaLinkedinIn, FaViber } from 'react-icons/fa';
 import TeamsData from "../../data/TeamsData"
 import Team from "../../images/team.png"
 import { NavLink } from 'react-router-dom';
 const Teams = () => {
+  let API = "https://pdeng.valleyhomecareservice.com/api/teams";
+  const [lists, setLists] = useState([]);
+ 
+
+  useEffect(() => {
+   
+    const fetchTeams = async () => {
+      try {
+        const response = await fetch(API);
+      
+        const data = await response.json();
+        setLists(data.data.teams);
+        // console.log(data);
+      } catch (error) {
+        console.log("Error fetching teams:", error);
+      }
+    };
+    fetchTeams();
+  }, []);
   return (
     <>
        <div className="relative  bg-slate-950 ">
@@ -27,7 +46,7 @@ const Teams = () => {
         className=" grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center m-20 
   "
       >
-        {TeamsData.map((val, ind) => {
+        {lists.map((val, ind) => {
           return (
             <>
               {/* <div className="mt-10 md:mt-24">
@@ -47,7 +66,7 @@ const Teams = () => {
                 <div className="content">
                   <div className="back">
                     <div className="back-content">
-                      <img src={val.imgsrc} />
+                      <img src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`} />
                     </div>
                   </div>
                   <div className="front">

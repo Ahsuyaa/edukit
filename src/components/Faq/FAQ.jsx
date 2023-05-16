@@ -10,19 +10,19 @@ const FAQ = () => {
   const [lists, setLists] = useState([]);
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchFaq = async () => {
       try {
         const response = await fetch(API);
 
         const data = await response.json();
 
         setLists(data.data.faqs);
-        console.log(data);
+        console.log(data.data);
       } catch (error) {
-        console.log("Error fetching blogs:", error);
+        console.log("Error fetching Faq:", error);
       }
     };
-    fetchCourses();
+    fetchFaq();
   }, []);
   const limitCharacters = 100;
 
@@ -45,13 +45,13 @@ const FAQ = () => {
     </div>
   </div>
     <div className="  max-w-lg mx-auto mt-10">
-      {lists.map((item, index) => (
+      {Object.values(lists).map((item, index) => (
         <div key={index} className="border-b border-gray-400">
           <button
             className="flex items-center justify-between w-full p-4 text-left focus:outline-none"
             onClick={() => handleClick(index)}
           >
-            <span className="font-medium">{item.title}</span>
+            <span className="font-medium">{item.question}</span>
             <span className={`transform transition-transform ${activeIndex === index ? 'rotate-180' : 'rotate-0'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-6 w-6">
                 <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
@@ -59,7 +59,7 @@ const FAQ = () => {
             </span>
           </button>
           <div className={`p-4 ${activeIndex === index ? 'block' : 'hidden'}`}>
-            <p>{item.content}</p>
+            <p>{item.answer}</p>
           </div>
         </div>
       ))}

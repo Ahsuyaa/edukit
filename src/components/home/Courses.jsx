@@ -18,6 +18,7 @@ const Courses = () => {
         const data = await response.json();
         
         setLists(data.data);
+        // console.log(data.data)
       } catch (error) {
         console.log("Error fetching blogs:", error);
       }

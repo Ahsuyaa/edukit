@@ -1,10 +1,35 @@
 import { Button } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import { FaMailBulk, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import contact from "../../images/contact.png";
 import "../component.css";
 import { NavLink } from "react-router-dom";
 const Contact = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [number, setNumber] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { name, email,number,subject,message };
+    try {
+      const response = await fetch('https://api.example.com/endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Process the response
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
     <>
       <div className="relative  bg-slate-950 ">
@@ -23,7 +48,9 @@ const Contact = () => {
       </div>
       <div class="grid  lg:grid-cols-2  gap-4 px-10 ">
         <div className="mt-10 shadow-xl rounded ">
+        <form onSubmit={handleSubmit}>
           <div className="p-4 ">
+           
             <label>
               Name <span className="text-red-600 ">*</span>
             </label>
@@ -31,6 +58,7 @@ const Contact = () => {
               className="w-full bg-gray-200 rounded border-none mt-2 focus:ring-0 placeholder:text-xs"
               type="text"
               placeholder=" Your Name"
+              value={name} onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="p-4 ">
@@ -39,6 +67,7 @@ const Contact = () => {
               className="w-full bg-gray-200 rounded border-none mt-2 focus:ring-0 placeholder:text-xs"
               type="text"
               placeholder="Your Email"
+              value={email} onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="p-4 ">
@@ -47,6 +76,7 @@ const Contact = () => {
               className="w-full bg-gray-200 rounded border-none mt-2 focus:ring-0 placeholder:text-xs"
               type="number"
               placeholder="Your Number"
+              value={number} onChange={(e) => setNumber(e.target.value)}
             />
           </div>
           <div className="p-4 ">
@@ -55,6 +85,7 @@ const Contact = () => {
               className="w-full bg-gray-200 rounded border-none mt-2 focus:ring-0 placeholder:text-xs"
               type="text"
               placeholder=" Your Name"
+              value={subject} onChange={(e) => setSubject(e.target.value)}
             />
           </div>
           <div className="p-4 ">
@@ -63,14 +94,16 @@ const Contact = () => {
               className="w-full bg-gray-200 rounded border-none mt-2 focus:ring-0 placeholder:text-xs h-32"
               type="text"
               placeholder="leave your message"
+              value={message} onChange={(e) => setMessage(e.target.value)}
             />
           </div>
           <div className="flex justify-center mb-10">
-            <Button className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br">
+            <Button className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br" type="submit">
               {" "}
               Submit
             </Button>
           </div>
+          </form>
         </div>
 
         <div className="mt-10  text-xl text-justify bg-gradient-to-r from-blue-300 via-blue-50 to-blue-200 ">
