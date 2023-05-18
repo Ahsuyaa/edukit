@@ -8,7 +8,25 @@ const Nav = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const [isSticky, setIsSticky] = useState(false);
+  const [lists, setLists] = useState([]);
 
+  useEffect(() => {
+    const fetchSetting = async () => {
+      try {
+        const response = await fetch(
+          "https://pdeng.valleyhomecareservice.com/api/setting"
+        );
+
+        const data = await response.json();
+
+        setLists(data.data.setting);
+        // console.log(data.data);
+      } catch (error) {
+        console.log("Error fetching blogs:", error);
+      }
+    };
+    fetchSetting();
+  }, []);
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 0) {
@@ -32,9 +50,14 @@ const Nav = () => {
     <>
       <div className={navbarClasses}>
         <NavLink to="/">
+        {lists.image ? (
         <div>
-          <img src={Logo} alt="" style={{ width: "100px" }} />
-        </div>
+        <img src={`https://pdeng.valleyhomecareservice.com/storage/${lists?.image.url}`} alt="" style={{ width: "100px" }} />
+      </div>
+      ) : (
+        <p>Loading img...</p>
+      )}
+       
         </NavLink>
         <div>
           <ul className=" hidden md:flex  px-2 py-2 text-white font-bold text-sm lg:text-lg">

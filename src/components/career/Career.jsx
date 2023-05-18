@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import career from "../../images/career.png";
-import CareerCard from "../Common/CareerCard";
-import CareerData from "../../data/CareerData";
+
 import "../component.css"
 import { NavLink } from "react-router-dom";
 const Career = () => {
@@ -49,11 +48,11 @@ const Career = () => {
         {lists.map((val, ind) => {
            const level1 =()=>
            {
-             if(val.job_level.choice==="1")
+             if(val.job_level.choice=="1")
              {
               return <p>senior</p>
              }
-             else if(val.job_level==="2")
+             else if(val.job_level=="2")
              {
               return <p>mid level</p>
              }
@@ -64,7 +63,7 @@ const Career = () => {
            }
            const type1 =()=>
            {
-             if(val.job_type==="1")
+             if(val.job_type=="1")
              {
               return <p>Full  Time</p>
              }
@@ -76,7 +75,7 @@ const Career = () => {
            }
            const salary1=()=>
            {
-             if(val.offered_salary==="1")
+             if(val.offered_salary=="1")
              {
               return <p>Negotiable</p>
              }
@@ -87,17 +86,37 @@ const Career = () => {
              }
            }
           return (
-            <CareerCard
-              key={ind}
-              title={val.title}
-              time={type1()}
-              level={level1()}
-              salary={salary1()
-              }
-            />
+          <>
+            <div className="h-40 text-center m-10 shadow-2xl  hover:scale-110 ">
+        
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {val.title}
+            </h3>
+             <div className="flex ">
+            <p className="text-x font-bold bg-blue-200 tracking-tight text-gray-500 dark:text-white sm:w-36 m-5 ">
+              {type1()}
+            </p>
+            <p className="text-x font-bold bg-blue-200 tracking-tight text-gray-500 dark:text-white sm:w-36 m-5">
+              {level1()}
+            </p>
+            <p className="text-x font-bold bg-blue-200 tracking-tight text-gray-500 dark:text-white sm:w-36 m-5 inline-flex">
+              {salary1()}
+            </p>
+            </div>
+            <div>
+              <NavLink to={`/careerdetail/${val.slug}`}>
+              <button className="hover:text-blue-600">view detail</button>
+              </NavLink>
+            </div>
+          
+        </div>
+           </> 
           );
+          
         })}
+        
       </div>
+     
     </>
   );
 };

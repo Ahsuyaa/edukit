@@ -49,14 +49,14 @@ const Courses = () => {
             // title={val.title} duration={val.duration}
             return (
               <>
-                <div className={animationClass}>
+                <div className={animationClass} key={val.slug}>
                   <div className="  my-2   relative overflow-hidden object-fill  group shadow-inner ">
                     <img
                       className="w-full h-48"
                       src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`}
                       alt=""
                     />
-                    <NavLink to="/learnmore">
+                    <NavLink to={`/learnmore/${val.slug}`}>
                       <div className="absolute inset-0 hidden group-hover:block hover:bg-cyan-400/80   transition-all duration-200 ">
                         <div className="flex items-center justify-center text-xl">
                           <button className=" inline-flex uppercase  text-white my-20  md:text-sm lg:text-xl font-semibold ">
@@ -82,7 +82,7 @@ const Courses = () => {
                   </div>
                   <div className="  lg:text-md md:text-sm sm:text-xs p-2">
                     <h3 className="text-[#1A2649] font-bold">{val.title}</h3>
-                    <span>duration={val.duration}</span>
+                    <span>duration:{val.duration}</span>
                   </div>
                   <div className="pb-2 px-2">
                     <p  dangerouslySetInnerHTML={{ __html: val.description.slice(0,limitCharacters) }}></p>

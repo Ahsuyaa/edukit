@@ -10,12 +10,12 @@ import Blog from "./Blog";
 import Testimonials from "./Testimonials";
 import Team from "./Team";
 import EduKit from "./EduKit";
-import Slider from "./Slider";
+import Carousel from "./Carousel";
 
 const Home = () => {
  return (
   <>
-       <Slider/>
+       {/* <Carousel/> */}
       <Courses />
       <Blog />
       <About />

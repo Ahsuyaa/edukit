@@ -50,13 +50,17 @@ const Training = () => {
           // title={val.title} duration={val.duration}
           return (
             <>
-              <div>
-              <div className="  my-6 sm:my-2 h-40  relative overflow-hidden object-fill  group shadow-inner  hover:scale-110">
-                 
+              <div key={val.slug}>
+              <div className="  my-6 sm:my-2 h-40  relative overflow-hidden object-fill  group shadow-inner  hover:scale-110" >
+                {
+                  console.log(val.slug)
+                }
+                
                  <img className="w-full h-40" src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`} alt="" />
-                 <NavLink to={'/learnmore'}>
+                 <NavLink to={`/learnmore/${val.slug}`}>
                  <div className="absolute inset-0 hidden group-hover:block hover:bg-cyan-400/80   transition-all duration-200 ">
                  <div className="flex items-center justify-center text-xl">
+                  
                    <button className="inline-flex  uppercase  text-white my-16  font-semibold">
                      
                      learn more

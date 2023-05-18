@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import cd from "../../images/careerDetail.png";
 import careerDetail from "../../data/careerDetail";
 import { Button } from "flowbite-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import ApplyForm from "./ApplyForm";
 const CareerDetail = () => {
     const [showMyModal,setShowModal]=useState(false);
@@ -10,34 +10,28 @@ const CareerDetail = () => {
     let API = "https://pdeng.valleyhomecareservice.com/api/vacancies";
     const [lists, setLists] = useState([]);
   
+    const { slug } = useParams();
+
     useEffect(() => {
-     
-  
-      const fetchVacancy = async () => {
-        try {
-          const response = await fetch(API);
-  
-          const data = await response.json();
-          
-          setLists(data.data.vacancies);
-          console.log(data)
-        } catch (error) {
-          console.log("Error fetching vaccancy:", error);
-        }
-      };
-      fetchVacancy();
+      fetch( "https://pdeng.valleyhomecareservice.com/api/vacancy/" + slug)
+        .then((res) => {
+          return res.json();
+        })
+        .then((resp) => {
+          setLists(resp.data.vacancy);
+          console.log(resp.data);
+        })
+        .catch((err) => {
+          console.log(err.message.vacancy);
+        });
     }, []);
-  return (
-    <>
-      <div>
-        {lists.map((val, ind) => {
-          const level1 =()=>
+    const level1 =()=>
           {
-            if(val.job_level.choice==="1")
+            if(lists?.job_level=="1")
             {
              return <p>senior</p>
             }
-            else if(val.job_level==="2")
+            else if(lists?.job_level==="2")
             {
              return <p>mid level</p>
             }
@@ -48,7 +42,7 @@ const CareerDetail = () => {
           }
           const type1 =()=>
           {
-            if(val.job_type==="1")
+            if(lists?.job_type=="1")
             {
              return <p>Full  Time</p>
             }
@@ -60,7 +54,7 @@ const CareerDetail = () => {
           }
           const salary1=()=>
           {
-            if(val.offered_salary==="1")
+            if(lists?.offered_salary=="1")
             {
              return <p>Negotiable</p>
             }
@@ -70,15 +64,16 @@ const CareerDetail = () => {
              return <p>fixed</p>
             }
           }
-          const dateString = val.updated_at;
+          const dateString = lists?.updated_at;
           const dateObj = new Date(dateString);
           const formattedDate = dateObj.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric"
           });
-          return (
-            <>
+  return (
+    <>
+    
               <div className="h-56 bg-[#050a30] ">
 
                 <div className="flex  p-10 ">
@@ -91,7 +86,7 @@ const CareerDetail = () => {
                   <h1 className="text-white"> Job Detail</h1>
                 </div>
                 <div className="text-2xl md:text-4xl   text-center text-white ">
-                  {val.title}
+                  {lists?.title}
                 </div> 
                 <div className="flex justify-end  ">
                    
@@ -112,7 +107,7 @@ const CareerDetail = () => {
                 </div>
                 <div className="shadow-md m-10  text-center ">
                   <label className=" font-bold">Company:</label> <br />{" "}
-                  <h1 className="text-gray-600">{val.company}</h1>
+                  <h1 className="text-gray-600">{lists?.company}</h1>
                 </div>
                 <div className="shadow-md m-10  text-center ">
                   <label className=" font-bold">Offered Salary:</label> <br />{" "}
@@ -124,7 +119,7 @@ const CareerDetail = () => {
                 </div>
                 <div className="shadow-md m-10  text-center ">
                   <label className=" font-bold"> Deadline:</label> <br />{" "}
-                  <h1 className="text-gray-600">{val.deadline_apply}</h1>
+                  <h1 className="text-gray-600">{lists?.deadline_apply}</h1>
                 </div>
               </div>
               <div className=" grid  lg:grid-cols-2 mx-20 md:mx-40">
@@ -133,19 +128,19 @@ const CareerDetail = () => {
                   Job specification
                   <br />
                 </label>
-                <h1 className="my-2  text-xl">Education Level:{val.education}</h1>
-                <h1 className="mb-2 text-xl">Experience required:{val.experience}</h1>
+                <h1 className="my-2  text-xl">Education Level:{lists?.education}</h1>
+                <h1 className="mb-2 text-xl">Experience required:{lists?.experience}</h1>
                 </div>
                 <div>
                 <label className="text-3xl  ">
                   Job description
                   <br />
                 </label>
-                <ul className="list-disc text-xl">
+                <ul className=" text-xl">
                   
-                    <li className="text-md justify-between m-2" >
-                       {val.description}
+                   . <li className="text-md justify-between m-2" dangerouslySetInnerHTML={{ __html: lists.description}}>
                     </li>
+                  
                   
                 </ul>
                
@@ -158,10 +153,9 @@ const CareerDetail = () => {
                   </Button>
                   <ApplyForm onClose={handleOnClose} visible={showMyModal}/>
                 </div>
-            </>
-          );
-        })}
-      </div>
+           
+
+      
     </>
   );
 };

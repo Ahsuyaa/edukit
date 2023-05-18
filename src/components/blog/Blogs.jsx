@@ -46,6 +46,13 @@ const Blogs = () => {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 ">
         {lists.map((val, ind) => {
+              const dateString = val.updated_at;
+              const dateObj = new Date(dateString);
+              const formattedDate = dateObj.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              });
           return (
             <>
               <div className=" m-10 shadow-lg bg-slate-100 hover:scale-110 transition-all duration-200  ">
@@ -67,10 +74,10 @@ const Blogs = () => {
 
                   <div className="flex justify-between items-center">
                     <h5
-                      dangerouslySetInnerHTML={{ __html: val.updated_at }}
+                      dangerouslySetInnerHTML={{ __html:formattedDate }}
                     ></h5>
                     <div>
-                      <NavLink to="/blogdetail">
+                      <NavLink to={`/blogdetail/${val.slug}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

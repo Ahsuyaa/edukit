@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'flowbite-react'
-import {FaFacebook,FaInstagram,FaTwitter}  from 'react-icons/fa'
+import {FaFacebook,FaInstagram,FaLinkedin,FaTwitter}  from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
 import logo from "../../images/logo.png"
 const Footer = () => {
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    const fetchSetting = async () => {
+      try {
+        const response = await fetch(
+          "https://pdeng.valleyhomecareservice.com/api/setting"
+        );
+
+        const data = await response.json();
+
+        setLists(data.data.setting);
+        // console.log(data.data);
+      } catch (error) {
+        console.log("Error fetching blogs:", error);
+      }
+    };
+    fetchSetting();
+  }, []);
   return (
    <>
    <div className='bg-[#050a30] p-10 mt-10'>
@@ -13,13 +32,19 @@ const Footer = () => {
    <div class="grid  grid-cols-2  md:grid-cols-4  text-neutral-50 mb-2 ">
     
   <div className='mt-5'>
-    <img  className="h-24 " src={logo} alt={"logo image"}/>
-
+    
+    {lists.image ? (
+        <div>
+        <img src={`https://pdeng.valleyhomecareservice.com/storage/${lists?.image.url}`} alt="" className='h-24'/>
+      </div>
+      ) : (
+        <p>Loading img...</p>
+      )}
     <p className=' text-gray-400 flex text-justify text-sm md:text-lg'>
-       yesma kei slogan lekhni ho
+      {lists.meta_description}
 
     </p>
-  </div>
+   </div>
   <div className='text-center mt-5'>
     <h3 className='text-md md:text-xl'>Related Links</h3>
     <ul className='text-gray-400 text-sm md:text-lg' >
@@ -52,9 +77,9 @@ const Footer = () => {
   <div>
     <form className=''>
     <div className='socials flex   text-2xl  mt-5  '>
-            <i className='icon  text-blue-600 mr-5'><FaFacebook/></i>
-            <i className='icon text-rose-500 mr-5'><FaInstagram/></i>
-            <i className='icon  text-blue-600 mr-5'><FaTwitter/></i>
+            <i className='icon  text-blue-600 mr-5'><NavLink to={lists.facebook}><FaFacebook/></NavLink></i>
+            <i className='icon text-rose-500 mr-5'><NavLink to={lists.instagram}><FaInstagram/></NavLink></i>
+            <i className='icon  text-blue-600 mr-5'><NavLink to={lists.linkedin}><FaLinkedin/></NavLink></i>
         </div>
         <h3 className='mt-5 text-sm md:text-xl'>Newsletter Signup</h3>
       <input className='w-full mt-5' type="text" placeholder="your email address"/><br/>
