@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import faq from "../../images/faq.png"
 import { NavLink } from 'react-router-dom';
-
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const FAQ = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
-  let API = "https://pdeng.valleyhomecareservice.com/api/faqs";
-  const [lists, setLists] = useState([]);
-
+  const API = `${BASE_URL}faqs`;
+  const [lists, setLists] = useState(null);
   useEffect(() => {
-    const fetchFaq = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-
-        setLists(data.data.faqs);
-        console.log(data.data);
-      } catch (error) {
-        console.log("Error fetching Faq:", error);
-      }
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
+      setLists(fetchedData);
+      console.log(fetchedData);
     };
-    fetchFaq();
-  }, []);
+
+    getData();
+  }, []);;
   const limitCharacters = 100;
 
   const handleClick = (index) => {
@@ -45,7 +39,7 @@ const FAQ = () => {
     </div>
   </div>
     <div className="  max-w-lg mx-auto mt-10">
-      {Object.values(lists).map((item, index) => (
+      {lists?.data.faqs.map((item, index) => (
         <div key={index} className="border-b border-gray-400">
           <button
             className="flex items-center justify-between w-full p-4 text-left focus:outline-none"

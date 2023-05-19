@@ -4,23 +4,19 @@ import CourseData from "../../data/CourseData";
 import "../component.css"
 
 import { NavLink } from "react-router-dom";
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const Training = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/courses";
-  const [lists, setLists] = useState([]);
-
+  const API = `${BASE_URL}courses`;
+  const [lists, setLists] = useState(null);
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-        
-        setLists(data.data.courses);
-      } catch (error) {
-        console.log("Error fetching blogs:", error);
-      }
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
+      setLists(fetchedData);
+      console.log(fetchedData);
     };
-    fetchCourses();
+
+    getData();
   }, []);
   const limitCharacters = 100;
   return (
@@ -45,7 +41,7 @@ const Training = () => {
         </div>
       </div>
       <div className=" mx-10 md:mx-20 grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 sm:gap-8 md:gap-8 mt-10">
-        {lists.map((val, ind) => {
+        {lists?.data.courses.map((val, ind) => {
           // key={ind}
           // title={val.title} duration={val.duration}
           return (

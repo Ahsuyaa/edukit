@@ -3,27 +3,19 @@ import career from "../../images/career.png";
 
 import "../component.css"
 import { NavLink } from "react-router-dom";
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const Career = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/vacancies";
-  const [lists, setLists] = useState([]);
-
+  const API = `${BASE_URL}vacancies`;
+  const [lists, setLists] = useState(null);
   useEffect(() => {
-   
-
-    const fetchVacancy = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-        
-        setLists(data.data.vacancies);
-        console.log(lists)
-      } catch (error) {
-        console.log("Error fetching vaccancy:", error);
-      }
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
+      setLists(fetchedData);
+      console.log(fetchedData);
     };
-    fetchVacancy();
-  }, []);
+    getData();
+  }, []);;
 
 
   return (
@@ -45,7 +37,7 @@ const Career = () => {
       </div>
       <div className="text-center text-bold text-4xl mt-10">Our Vacancy</div>
       <div className=" grid sm:grid-cols-2 lg:grid-cols-3 shadow-white">
-        {lists.map((val, ind) => {
+        {lists?.data.vacancies.map((val, ind) => {
            const level1 =()=>
            {
              if(val.job_level.choice=="1")

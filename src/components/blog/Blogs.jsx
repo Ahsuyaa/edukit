@@ -3,26 +3,20 @@ import Bdata from "../../data/Bdata";
 import blogcover from "../../images/blogcover.png";
 import "../component.css";
 import { NavLink } from "react-router-dom";
-
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const Blogs = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/blogs";
-  const [lists, setLists] = useState([]);
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-
-        setLists(data.data.blogs);
-        console.log(data);
-      } catch (error) {
-        console.log("Error fetching blogs:", error);
-      }
-    };
-    fetchCourses();
-  }, []);
+const API = `${BASE_URL}blogs`;
+const [lists, setLists] = useState(null);
+useEffect(() => {
+  const getData = async () => {
+    const fetchedData = await fetchData(API);
+    setLists(fetchedData);
+    console.log(fetchedData);
+  };
+  getData();
+}, []);
   const limitCharacters = 100;
   return (
     <>
@@ -45,7 +39,7 @@ const Blogs = () => {
         </div>
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 ">
-        {lists.map((val, ind) => {
+        {lists?.data.blogs.map((val, ind) => {
               const dateString = val.updated_at;
               const dateObj = new Date(dateString);
               const formattedDate = dateObj.toLocaleDateString("en-US", {

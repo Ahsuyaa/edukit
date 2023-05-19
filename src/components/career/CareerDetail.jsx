@@ -138,7 +138,7 @@ const CareerDetail = () => {
                 </label>
                 <ul className=" text-xl">
                   
-                   . <li className="text-md justify-between m-2" dangerouslySetInnerHTML={{ __html: lists.description}}>
+                    <li className="text-md justify-between m-2" dangerouslySetInnerHTML={{ __html: lists.description}}>
                     </li>
                   
                   

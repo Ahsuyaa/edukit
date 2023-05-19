@@ -5,25 +5,18 @@ import { useInView } from "react-intersection-observer";
 import { NavLink } from "react-router-dom";
 
 import DOMPurify from "dompurify";
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const Courses = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/courses";
-  const [lists, setLists] = useState([]);
-
+  const API = `${BASE_URL}courses`;
+  const [lists, setLists] = useState(null);
   useEffect(() => {
-   
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-        
-        setLists(data.data);
-        // console.log(data.data)
-      } catch (error) {
-        console.log("Error fetching blogs:", error);
-      }
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
+      setLists(fetchedData);
+      console.log(fetchedData);
     };
-    fetchCourses();
+    getData();
   }, []);
   const limitCharacters = 100;
   const sectionRef = useRef(null);
@@ -44,7 +37,7 @@ const Courses = () => {
           className=" mx-10 md:mx-20 grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 sm:gap-8 md:gap-8"
           ref={ref}
         >
-          {lists.courses?.map((val, ind) => {
+          {lists?.data.courses.map((val, ind) => {
             // key={ind}
             // title={val.title} duration={val.duration}
             return (

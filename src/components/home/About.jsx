@@ -2,27 +2,22 @@ import React, { useEffect, useState } from "react";
 import AboutImg from "../../images/about.png";
 
 import { FaArrowRight, FaCheck } from "react-icons/fa";
-import myVideo from "../../images/videoA.mov";
+
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const About = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/about";
-  const [lists, setLists] = useState([]);
-  let about_us=[];
 
+
+
+  const API = `${BASE_URL}about`;
+  const [lists, setLists] = useState(null);
   useEffect(() => {
-    const fetchAbout = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-          // about_us=data;
-        setLists(data.data.about);
-        // console.log(data);
-      } catch (error) {
-        console.log("Error fetching about:", error);
-      }
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
+      setLists(fetchedData);
+      console.log(fetchedData);
     };
-    fetchAbout();
-    // console.log(lists);
+    getData();
   }, []);
   const limitCharacters = 100;
   return (
@@ -37,7 +32,7 @@ const About = () => {
             {lists ? (
         <div>
           
-          <p  dangerouslySetInnerHTML={{ __html: lists.description}}></p>
+          <p  dangerouslySetInnerHTML={{ __html: lists.data.about.description}}></p>
         </div>
       ) : (
         <p>Loading data...</p>
@@ -50,10 +45,10 @@ const About = () => {
 
           <div className="my-10 md:my-24 ">
            
-            {lists.image ? (
+            {lists? (
         <div>
           
-          <img  className="w-full" src={`https://pdeng.valleyhomecareservice.com/storage/${lists.image.url}`}/>
+          <img  className="w-full" src={`https://pdeng.valleyhomecareservice.com/storage/${lists.data.about.image.url}`}/>
         </div>
       ) : (
         <p>Loading img...</p>

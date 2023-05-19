@@ -6,25 +6,30 @@ import Bdata from "../../data/Bdata";
 import Rdata from "../../data/Rdata";
 import RecentBlog from "../Common/RecentBlog";
 import { NavLink } from "react-router-dom";
-
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const Blog = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/blogs";
-  const [lists, setLists] = useState([]);
-
+  const API = `${BASE_URL}blogs`;
+  const [lists, setLists] = useState(null);
+  const [rblog, setRblog] = useState(null);
   useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const response = await fetch(API);
-
-        const data = await response.json();
-
-        setLists(data.data.blogs);
-        // console.log(data);
-      } catch (error) {
-        console.log("Error fetching blogs:", error);
-      }
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
+      setLists(fetchedData);
+      
     };
-    fetchBlog();
+    getData();
+  }, []);
+  useEffect(() => {
+    const setData = async () => {
+      const fetchedData = await fetchData(API);
+      // Sort the fetched data in ascending order
+      const sortedData = fetchedData.sort((a, b) =>a.index - b.index);
+      setRblog(sortedData);
+      console.log(sortedData);
+    };
+
+    setData();
   }, []);
   return (
     <>
@@ -32,7 +37,7 @@ const Blog = () => {
         Blogs{" "}
       </div>
       <div className="mt-10 grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-10 md:px-20  ">
-        {lists.map((val, ind) => {
+        {lists?.data.blogs.map((val, ind) => {
           if (ind < 2) {
             return (
               <CommonCard
@@ -45,7 +50,7 @@ const Blog = () => {
         })}
 
         <div className="hidden lg:grid grid-rows-3 gap-4">
-          {Rdata.map((val, ind) => {
+          {rblog?.data.blogs.map((val, ind) => {
             return (
               <RecentBlog key={ind} imgsrc={val.imgSrc} title={val.title} />
             );
