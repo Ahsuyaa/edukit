@@ -25,6 +25,9 @@ const CareerDetail = () => {
           console.log(err.message.vacancy);
         });
     }, []);
+   
+const propsId= lists?.id;
+console.log(propsId)
     const level1 =()=>
           {
             if(lists?.job_level=="1")
@@ -151,7 +154,7 @@ const CareerDetail = () => {
                   <Button className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br mr-10"onClick={()=>setShowModal(true)}>
                     Apply Now
                   </Button>
-                  <ApplyForm onClose={handleOnClose} visible={showMyModal}/>
+                  <ApplyForm onClose={handleOnClose} visible={showMyModal} vacancy_id={propsId} />
                 </div>
            
 

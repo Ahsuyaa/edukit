@@ -6,7 +6,7 @@ const EduKit = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   return (
     <>
-      <div className="grid md:grid-cols-2 mt-10 md:mt-24 bg-slate-50">
+      <div className="grid md:grid-cols-2 mt-10 md:mt-24">
         
         <div  className="hidden md:block md:m-10">
         <img className=" md:visible h-96 w-full " src={kit} alt="img"/>
@@ -18,7 +18,7 @@ const EduKit = () => {
             numquam mollitia atque earum illo enim ut nesciunt quia dolor?Lorem
             ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem
             asperiores labore vel ipsum illo fugit, illum repellendus quod error
-            reiciendis!
+            reiciendis! 
           </p>
           <div className="flex  space-x-1 justify-center m-5 md:m-10">
             {TabsData.map((tab, index) => (

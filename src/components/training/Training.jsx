@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import trainingImg from "../../images/training.png";
-import CourseData from "../../data/CourseData";
 import "../component.css"
 
 import { NavLink } from "react-router-dom";
@@ -28,7 +27,7 @@ const Training = () => {
           alt="My Image"
           className="w-full h-56 opacity-25"
         />
-        <div className="absolute top-0 flex m-10 ">
+        <div className="absolute top-0 flex m-10 "> 
           <NavLink to="/">
           <h1 className="mr-2 text-gray-400">Home /</h1>
           </NavLink>

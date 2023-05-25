@@ -11,54 +11,67 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
-  const validateForm=()=>
-  {
-    let errors ={};
-    if(!name)
-    {
-      errors.name = 'Name is required';
+  const [toast, setToast] = useState(true);
+  const [myData, setMyData] = useState(null);
+ 
+  const validateForm = () => {
+    let errors = {};
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (!name) {
+      errors.name = "Name is required";
+    } else if (name.length > 255) {
+      errors.name = "letter should not exceed more than 255 character ";
     }
-    if(!email)
-    {
-      errors.email = 'email is required';
+    if (!email) {
+      errors.email = "email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      errors.email = "invalid email";
     }
-    if(!phone_no)
-    {
-      errors.phone_no = 'number is required';
+    if (!phone_no) {
+      errors.phone_no = "number is required";
+    } else if (phone_no <= 10) {
+      errors.phone_no = "number must be 10 letter";
     }
-    if(!subject)
-    {
-      errors.subject = 'subject is required';
+    if (!subject) {
+      errors.subject = "subject is required";
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;
-  }
- 
+  };
+
   function handleSubmit() {
     console.log(name, email, phone_no);
-    if(validateForm())
-    {
-    let data = { name, email, phone_no, subject, message };
-    fetch("https://pdeng.valleyhomecareservice.com/api/contact",
-    {
-      method:'POST',
-      headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(data)
+    if (validateForm()) {
+      let data = { name, email, phone_no, subject, message };
+      fetch("https://pdeng.valleyhomecareservice.com/api/contact", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((result) => {
+        console.warn("result", result);
+      });
+      const success = "You queries has been submitted. Thank you";
+      const storedMessage = sessionStorage.setItem(
+        "myData",
+        JSON.stringify(success)
+      );
 
-    }).then((result)=>
-    {
-      console.warn("result",result)
-    })
+     
+      const data1 = sessionStorage.getItem('myData');
+      setMyData(JSON.parse(data1));
+      console.log(myData);
 
     }
-    
   }
+  const close = ()=>setMyData(false);
 
   return (
     <>
+     
       <div className="relative  bg-slate-950 ">
         <img src={contact} alt="My Image" className="w-full h-56 opacity-25" />
         <div className="absolute top-0 flex m-10 ">
@@ -86,7 +99,7 @@ const Contact = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-              {errors.name && <span className="text-red-700">{errors.name}</span>}
+            {errors.name && <span className="text-red-700">{errors.name}</span>}
           </div>
           <div className="p-4 ">
             <label>Email</label>
@@ -97,7 +110,9 @@ const Contact = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {errors.email && <span className="text-red-700">{errors.email}</span>}
+            {errors.email && (
+              <span className="text-red-700">{errors.email}</span>
+            )}
           </div>
           <div className="p-4 ">
             <label>Phone Number</label>
@@ -108,7 +123,9 @@ const Contact = () => {
               value={phone_no}
               onChange={(e) => setNumber(e.target.value)}
             />
-            {errors.phone_no && <span className="text-red-700">{errors.phone_no}</span>}
+            {errors.phone_no && (
+              <span className="text-red-700">{errors.phone_no}</span>
+            )}
           </div>
           <div className="p-4 ">
             <label>Subject</label>
@@ -119,7 +136,9 @@ const Contact = () => {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
             />
-            {errors.subject && <span className="text-red-700">{errors.subject}</span>}
+            {errors.subject && (
+              <span className="text-red-700">{errors.subject}</span>
+            )}
           </div>
           <div className="p-4 ">
             <label>Messages</label>
@@ -141,6 +160,19 @@ const Contact = () => {
               Submit
             </Button>
           </div>
+          
+          {myData &&
+          
+          <div className="flex justify-between  bg-green-200 p-4 text-green-900 rounded w-full">
+
+            <p className=" ">{myData} </p>
+            <p onClick={close} title="dismiss" className="text-rose-500 text-2xl font-semibold cursor-pointer">&times;</p>
+          </div>
+          
+          
+          }
+          
+          
         </div>
 
         <div className="mt-10  text-xl text-justify bg-gradient-to-r from-blue-300 via-blue-50 to-blue-200 ">

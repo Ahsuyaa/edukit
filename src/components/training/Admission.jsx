@@ -11,6 +11,7 @@ const Admission = () => {
   const [other_course, setOther] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
+  const [myData, setMyData] = useState(null);
   const validateForm = () => {
     let errors = {};
     if (!name) {
@@ -57,8 +58,19 @@ const Admission = () => {
     }).then((result) => {
       console.log("result", result);
     });
+    const success = "You queries has been submitted. Thank you";
+      const storedMessage = sessionStorage.setItem(
+        "myData",
+        JSON.stringify(success)
+      );
+
+     
+      const data1 = sessionStorage.getItem('myData');
+      setMyData(JSON.parse(data1));
+      console.log(myData);
   }
   }
+  const close = ()=>setMyData(false);
   const [lists, setLists] = useState([]);
   const fetchCourses = async () => {
     try {
@@ -181,6 +193,16 @@ const Admission = () => {
               Submit
             </Button>
           </div>
+          {myData &&
+          
+          <div className="flex justify-between  bg-green-200 p-4 text-green-900 rounded w-full">
+
+            <p className=" ">{myData} </p>
+            <p onClick={close} title="dismiss" className="text-rose-500 text-2xl font-semibold cursor-pointer">&times;</p>
+          </div>
+          
+          
+          }
         </div>
         <div className="md:mt-40 md:mx-20">
           <img

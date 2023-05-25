@@ -11,9 +11,8 @@ const CommonCard = (props) => {
           {props.title}
         </h3>
 
-        <p className="  dark:text-white p-2">
-        <p  dangerouslySetInnerHTML={{ __html: props.description.slice(0,limitCharacters) }}></p>
-        </p>
+        <p className="text-lg p-2" dangerouslySetInnerHTML={{ __html: props.description.slice(0,limitCharacters) }}></p>
+      
       </div>
     </>
   );

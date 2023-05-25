@@ -14,6 +14,7 @@ const Testimonials = ({ testimonials }) => {
   const [lists, setLists] = useState(null);
   useEffect(() => {
     const getData = async () => {
+      
       const fetchedData = await fetchData(API);
       setLists(fetchedData);
       console.log(fetchedData.data);
@@ -27,9 +28,9 @@ const Testimonials = ({ testimonials }) => {
     infinite: true,
     speed: 500,
     slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 5000,
+    // slidesToScroll: 1,
+    // autoplay: true,
+    // autoplaySpeed: 2000,
     margin: 300,
     responsive: [
       
@@ -47,20 +48,19 @@ const Testimonials = ({ testimonials }) => {
     
   <>
 
-  <div className="mt-24 text-2xl text-[#1a2649] font-semibold text-center mb-2">What our student says </div>
-   <div className=" text-4xl text-center text-[#1a2649] font-semibold">Our Testimonials </div>
+
+   <div className="mt-24  text-4xl text-center text-[#1a2649] font-semibold">What our student says </div>
     <Slider {...settings}>
       {/* Loop through testimonials data and render each testimonial as a slide */}
       {lists?.data.testimonials.map((testimonials) => (
-        <div className="testimonial-card   p-10 bg-slate-100  mt-10" key={testimonials.id}>
-          <div className="grid md:grid-cols-2 gap-5">
+        <div className="testimonial-card  p-10 mt-10" key={testimonials.id}>
+          <div className="grid md:grid-cols-2 gap-0">
             <div>
-              <img className="w-full h-40 object-cover" src={`https://pdeng.valleyhomecareservice.com/storage/${testimonials.image.url}`} alt="..." />
+              <img className="w-[100%] h-52 object-cover px-8" src={`https://pdeng.valleyhomecareservice.com/storage/${testimonials.image.url}`} alt="..." />
             </div>
             <div>
-              <h4 className="mb-2 text-[#1a2649] font-bold">{testimonials.name}</h4>
-              <p className="text-justify mr-5">
-                {testimonials.description}
+              <h4 className="mb-2 text-[#1a2649] font-bold text-2xl">{testimonials.name}</h4>
+              <p className="text-justify mr-5 text-xl"  dangerouslySetInnerHTML={{ __html: testimonials.description }}>
                
               </p>
             </div>

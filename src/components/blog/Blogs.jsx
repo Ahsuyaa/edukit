@@ -49,7 +49,7 @@ useEffect(() => {
               });
           return (
             <>
-              <div className=" m-10 shadow-lg bg-slate-100 hover:scale-110 transition-all duration-200  ">
+              <div className=" m-10 shadow-lg bg-slate-100  transform transition duration-1000 ease-in-out hover:scale-110">
                 <img
                   className="h-56 w-full"
                   src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`}

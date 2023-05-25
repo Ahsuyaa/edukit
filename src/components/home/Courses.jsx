@@ -25,7 +25,7 @@ const Courses = () => {
   });
   const animationClass = `${
     inView ? "animate-fadeInUp delay-150" : "md:opacity-5"
-  } transform transition duration-1000 ease-in-out hover:scale-110 transition-all duration-200`;
+  } transform transition duration-1000 ease-in-out hover:scale-110 `;
   // console.log(lists);
   return (
     <>
@@ -37,7 +37,7 @@ const Courses = () => {
           className=" mx-10 md:mx-20 grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 sm:gap-8 md:gap-8"
           ref={ref}
         >
-          {lists?.data.courses.map((val, ind) => {
+          {lists?.data.courses.slice(0,8).map((val, ind) => {
             // key={ind}
             // title={val.title} duration={val.duration}
             return (
@@ -50,7 +50,7 @@ const Courses = () => {
                       alt=""
                     />
                     <NavLink to={`/learnmore/${val.slug}`}>
-                      <div className="absolute inset-0 hidden group-hover:block hover:bg-cyan-400/80   transition-all duration-200 ">
+                      <div className="absolute inset-0 hidden group-hover:block hover:bg-cyan-400/80   ">
                         <div className="flex items-center justify-center text-xl">
                           <button className=" inline-flex uppercase  text-white my-20  md:text-sm lg:text-xl font-semibold ">
                             learn more
@@ -73,14 +73,14 @@ const Courses = () => {
                       </div>
                     </NavLink>
                   </div>
-                  <div className="  lg:text-md md:text-sm sm:text-xs p-2">
-                    <h3 className="text-[#1A2649] font-bold">{val.title}</h3>
-                    <span>duration:{val.duration}</span>
+                  <div className="  lg:text-xl md:text-sm sm:text-xs p-4">
+                    <h3 className="text-[#1A2649] font-bold  ">{val.title}</h3>
+                    <label className="text-slate-500 ">Duration:</label> <span className="font-semibold">{val.duration}</span>
                   </div>
-                  <div className="pb-2 px-2">
+                  {/* <div className="pb-2 px-2">
                     <p  dangerouslySetInnerHTML={{ __html: val.description.slice(0,limitCharacters) }}></p>
-                    {/* <span>duration={val.duration}</span> */}
-                  </div>
+                    
+                  </div> */}
                 </div>
               </>
             );

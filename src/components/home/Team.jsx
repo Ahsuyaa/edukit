@@ -10,26 +10,19 @@ import {
   FaTwitter,
   FaViber,
 } from "react-icons/fa";
-
+import { fetchData } from '../fetching/FetchData';
+import BASE_URL from "../../API/Consts";
 const Team = () => {
-  let API = "https://pdeng.valleyhomecareservice.com/api/teams";
-  const [lists, setLists] = useState([]);
- 
-
+  const API = `${BASE_URL}teams`;
+  const [lists, setLists] = useState(null);
   useEffect(() => {
-   
-    const fetchTeams = async () => {
-      try {
-        const response = await fetch(API);
+    const getData = async () => {
+      const fetchedData = await fetchData(API);
       
-        const data = await response.json();
-        setLists(data.data.teams);
-        // console.log(data);
-      } catch (error) {
-        console.log("Error fetching teams:", error);
-      }
+      setLists(fetchedData);;
+      console.log(fetchedData);
     };
-    fetchTeams();
+    getData();
   }, []);
   // const [data, setData] = useState([...TeamsData]);
   // const [showMore, setShowMore] = useState(false);
@@ -41,16 +34,17 @@ const Team = () => {
   // const displayedData = showMore ? data : data.slice(0, 4);
   return (
     <>
-    <div className="mt-24 text-2xl text-[#1a2649] font-semibold text-center mb-2">Meet the Team </div>
-   <div className=" text-4xl text-center text-[#1a2649] font-semibold">Team Members </div>
+  
+   <div className=" text-4xl text-center text-[#1a2649] font-semibold mt-24">Meet the Team  </div>
       <div
-        id="teamsid"
-        className=" grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center m-20 
-  "
-      >
-        {lists.map((val, ind) => {
+       
+        className="xl:flex justify-between grid lg:grid-cols-4 sm:grid-cols-2 xl:mx-72 lg:mx-28 m-20"
+      > 
+        {lists?.data.teams.slice(0,4).map((val, ind) => {
+        
           return (
             <>
+            
               {/* <div className="mt-10 md:mt-24">
                 <img
                   className=" md:w-[400px] h-[400px] p-1  object-center hover:ring-red-500 hover:hue-rotate-15	"
@@ -63,12 +57,13 @@ const Team = () => {
                   <br />
                   {val.position}
                 </div>
-              </div> */}
+              </div> */} 
+              
               <div className="card mb-5 ">
                 <div className="content">
                   <div className="back">
                     <div className="back-content">
-                      <img src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`} />
+                      <img className="h-[100%]" src={`https://pdeng.valleyhomecareservice.com/storage/${val.image.url}`} />
                     </div>
                   </div>
                   <div className="front">
@@ -89,18 +84,18 @@ const Team = () => {
                          
                         </div>
                         <p className="card-footer">
-                          <div className=" hidden socials md:flex  justify-end text-end  ">
-                            <i className="icon  text-blue-500 mr-5 md:text-lg ">
+                          <div className=" flex  socials  justify-end text-end  ">
+                            <i className="icon text-xl text-blue-500 mr-5 md:text-lg ">
                               <FaFacebook />
                             </i>
-                            <i className="icon text-rose-400 mr-5 md:text-lg ">
+                            <i className="icon text-xl text-rose-400 mr-5 md:text-lg ">
                               <FaInstagram />
                             </i>
 
-                            <i className="icon text-purple-600 mr-5 md:text-lg ">
+                            <i className="icon text-xl text-purple-600 mr-5 md:text-lg ">
                               <FaViber />
                             </i>
-                            <i className="icon  text-blue-500 mr-5 md:text-lg ">
+                            <i className="icon text-xl  text-blue-500 mr-5 md:text-lg ">
                               <FaLinkedinIn />
                             </i>
                           </div>

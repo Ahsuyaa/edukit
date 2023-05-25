@@ -20,9 +20,9 @@ const BlogDetail = () => {
   }, []);
   return (
     <>
-    <div className='md:mx-40 max-w-4xl'>
-        <div><img className='h-60 w-full mt-5' src={seo} alt="image"/></div>
-        <div>
+    <div className='grid md:grid-cols-2 '>
+        <div><img className=' w-full mt-5' src={seo} alt="image"/></div>
+        <div className='mx-10'>
             <h1 className='text-2xl md:text-4xl font-semibold my-2 '>{lists?.title} </h1>
             <p className='md:text-xl'dangerouslySetInnerHTML={{ __html: lists.description}}></p>
         </div>
