@@ -45,6 +45,9 @@ const Nav = () => {
   const navbarClasses = `z-50  w-full h-[100px] flex justify-between items-center md:px-2 bg-[#050a30]   ${
     isSticky ? "fixed top-0 w-full" : ""
   }`;
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -61,27 +64,27 @@ const Nav = () => {
         </NavLink>
         <div>
           <ul className=" hidden md:flex  px-2 py-2 text-white font-bold text-sm lg:text-lg">
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               <NavLink to={"/"}>Home</NavLink>
             </li>
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               <NavLink to="/trainings">Trainings </NavLink>
             </li>
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               <NavLink to="/teams">Teams</NavLink>
             </li>
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               <NavLink to="/faq">FAQ </NavLink>
             </li>
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               {" "}
               <NavLink to="/career">Career </NavLink>
             </li>
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               {" "}
               <NavLink to="/blogs">Blog </NavLink>
             </li>
-            <li className="m-5">
+            <li className="m-5"  onClick={scrollToTop}>
               <NavLink to={"/contact"}>Contact Us</NavLink>
             </li>
           </ul>

@@ -125,21 +125,21 @@ console.log(propsId)
                   <h1 className="text-gray-600">{lists?.deadline_apply}</h1>
                 </div>
               </div>
-              <div className=" grid  lg:grid-cols-2 mx-20 md:mx-40">
-                <div className="mb-5 ">
+              <div className=" text-center mx-20 md:mx-40">
+                {/* <div className="mb-5 ">
                 <label className="text-3xl">
                   Job specification
                   <br />
                 </label>
                 <h1 className="my-2  text-xl">Education Level:{lists?.education}</h1>
                 <h1 className="mb-2 text-xl">Experience required:{lists?.experience}</h1>
-                </div>
-                <div>
-                <label className="text-3xl  ">
-                  Job description
-                  <br />
+                </div> */}
+              
+                <label className="text-4xl  ">
+                  Job description 
+              
                 </label>
-                <ul className=" text-xl">
+                <ul className=" text-2xl">
                   
                     <li className="text-md justify-between m-2" dangerouslySetInnerHTML={{ __html: lists.description}}>
                     </li>
@@ -147,7 +147,7 @@ console.log(propsId)
                   
                 </ul>
                
-                </div>
+               
               </div>
               <div className="flex justify-center mt-5  ">
                    

@@ -1,9 +1,11 @@
 import { Button } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMailBulk, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import contact from "../../images/contact.png";
 import "../component.css";
 import { NavLink } from "react-router-dom";
+import { fetchData } from "../fetching/FetchData";
+import BASE_URL from "../../API/Consts";
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +15,8 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [toast, setToast] = useState(true);
   const [myData, setMyData] = useState(null);
- 
+  const API = `${BASE_URL}setting`;
+  const [lists, setLists] = useState(null);
   const validateForm = () => {
     let errors = {};
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -60,18 +63,30 @@ const Contact = () => {
         JSON.stringify(success)
       );
 
-     
-      const data1 = sessionStorage.getItem('myData');
+      const data1 = sessionStorage.getItem("myData");
       setMyData(JSON.parse(data1));
       console.log(myData);
-
     }
+    setName("");
+    setEmail("");
+    setNumber("");
+    setSubject("");
+    setMessage("");
   }
-  const close = ()=>setMyData(false);
+  const close = () => setMyData(false);
+  useEffect(() => {
+    const getData = async () => {
+      // await new Promise(resolve => setTimeout(resolve, 20000));
+      const fetchedData = await fetchData(API);
+
+      setLists(fetchedData);
+      console.log(fetchedData);
+    };
+    getData();
+  }, []);
 
   return (
     <>
-     
       <div className="relative  bg-slate-950 ">
         <img src={contact} alt="My Image" className="w-full h-56 opacity-25" />
         <div className="absolute top-0 flex m-10 ">
@@ -87,7 +102,7 @@ const Contact = () => {
         </div>
       </div>
       <div class="grid  lg:grid-cols-2  gap-4 px-10 ">
-        <div className="mt-10 shadow-xl rounded ">
+        <div className="mt-10 ">
           <div className="p-4 ">
             <label>
               Name <span className="text-red-600 ">*</span>
@@ -160,38 +175,39 @@ const Contact = () => {
               Submit
             </Button>
           </div>
-          
-          {myData &&
-          
-          <div className="flex justify-between  bg-green-200 p-4 text-green-900 rounded w-full">
 
-            <p className=" ">{myData} </p>
-            <p onClick={close} title="dismiss" className="text-rose-500 text-2xl font-semibold cursor-pointer">&times;</p>
-          </div>
-          
-          
-          }
-          
-          
+          {myData && (
+            <div className="flex justify-between  bg-green-200 p-4 text-green-900 rounded w-full">
+              <p className=" ">{myData} </p>
+              <p
+                onClick={close}
+                title="dismiss"
+                className="text-rose-500 text-2xl font-semibold cursor-pointer"
+              >
+                &times;
+              </p>
+            </div>
+          )}
         </div>
 
-        <div className="mt-10  text-xl text-justify bg-gradient-to-r from-blue-300 via-blue-50 to-blue-200 ">
+        <div className="mt-10  text-xl text-justify bg-gray-300">
           <h1 className="font-bold m-5"> Edu Kit</h1>
           <div className="flex display-flex p-5  m-2">
-            <FaMapMarkerAlt />{" "}
-            <p className="ml-2">
-              hriganesh Marg, imadol, gwarkhu, lalitpur 44600, Nepal
+            <p className=" text-3xl hover:text-blue-600 ">
+              <FaMapMarkerAlt />{" "}
             </p>
+            <p className="ml-2  text-3xl">{lists?.data.setting.address}</p>
           </div>
           <div className="flex display-flex p-5  justify-content m-2 ">
-            <FaPhoneAlt />{" "}
-            <p className="ml-2">
-              +977-1-4117578 / 4111849 / 4111583 / 5912405 9841002000 /
-              9808724535
-            </p>
+            <p className="text-3xl  hover:text-blue-600">
+              <FaPhoneAlt />{" "}
+            </p>{" "}
+            <p className="ml-2 text-3xl ">{lists?.data.setting.phone_no}</p>
           </div>
-          <div className="flex display-flex p-5 justify-content m-2 ">
-            <FaPhoneAlt />{" "}
+          {/* <div className="flex display-flex p-5 justify-content m-2 ">
+            <p className="text-3xl  ">
+              <FaPhoneAlt />{" "}
+            </p>{" "}
             <p className="ml-2">
               Departments: <br />
               Inquiry Hotline : 9841002000 <br />
@@ -199,19 +215,12 @@ const Contact = () => {
               <br /> HR : 9841904562 <br />
               Client Relation : 9840680858
             </p>
-          </div>
+          </div> */}
           <div className="flex display-flex p-5 justify-content m-2 ">
-            <FaMailBulk />{" "}
-            <p className="ml-2">
-              {" "}
-              info@kitwosd.com <br />
-              info@kitwosd.com
-              <br />
-              info@kitwosd.com
-              <br />
-              info@kitwosd.com
-              <br />
-            </p>
+            <p className="text-3xl hover:text-blue-600 ">
+              <FaMailBulk />{" "}
+            </p>{" "}
+            <p className="ml-2 text-3xl">{lists?.data.setting.email}</p>
           </div>
         </div>
       </div>

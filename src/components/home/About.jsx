@@ -11,7 +11,7 @@ const About = () => {
   const [lists, setLists] = useState(null);
   useEffect(() => {
     const getData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // await new Promise(resolve => setTimeout(resolve, 20000));
       const fetchedData = await fetchData(API);
       
       setLists(fetchedData);
@@ -31,7 +31,7 @@ const About = () => {
             <hr />
             {lists ? (
               <div>
-                <p className="text-2xl"
+                <p className="text-2xl text-justify"
                   dangerouslySetInnerHTML={{
                     __html: lists.data.about.description,
                   }}

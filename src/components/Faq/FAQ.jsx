@@ -38,7 +38,7 @@ const FAQ = () => {
       <p className="text-white text-center text-sm md:text-4xl font-bold animate-ping temporary-spin ">Frequently Asked Questions</p>
     </div>
   </div>
-    <div className="  max-w-lg mx-auto mt-10">
+    <div className="  w-full px-20 mx-auto mt-10">
       {lists?.data.faqs.map((item, index) => (
         <div key={index} className="border-b border-gray-400">
           <button

@@ -26,8 +26,8 @@ const Blog = () => {
       <div className=" mt-24 text-4xl text-center text-[#1a2649] font-semibold">
         Blogs{" "}
       </div>
-      <div className="mt-10 grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-10 md:px-20  ">
-        {lists?.data.blogs.slice(0,3).map((val, ind) => {
+      <div className="mt-10 grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-10 md:px-20  ">
+        {lists?.data.blogs.slice(0,4).map((val, ind) => {
        
             return (
               <CommonCard

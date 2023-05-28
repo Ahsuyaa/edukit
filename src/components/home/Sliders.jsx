@@ -46,7 +46,7 @@ const Sliders = ({ val }) => {
         <div  key={val.id}>
          
             <div>
-              <img className="w-full lg:h-[600px] xl:h-[650px]" src={`https://pdeng.valleyhomecareservice.com/storage/${val}`} alt="..." />
+              <img className="w-full lg:h-[700px] xl:h-[850px]" src={`https://pdeng.valleyhomecareservice.com/storage/${val}`} alt="..." />
             </div>
          
          

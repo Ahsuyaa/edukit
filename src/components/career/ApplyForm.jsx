@@ -21,12 +21,19 @@ const ApplyForm = ({ visible, onClose, vacancy_id }) => {
     if (!phone_no) {
       errors.phone_no = "Phone number is required";
     }
+    if (!file) {
+      errors.file = "file is required";
+    }
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
   const handleFileChange = (e) => {
+    // console.log()
     setFile(e.target.files[0]);
+    // console.log('bhbhb');
+    console.log(e.target.files[0]);
+
   };
 
   const handleSubmit = () => {
@@ -66,10 +73,11 @@ const ApplyForm = ({ visible, onClose, vacancy_id }) => {
     setName("");
     setEmail("");
     setNumber("");
-    setFile("");
+    setFile(null);
     setPortfolio("");
     setDescription("");
-    // setMyData(null);
+    setMyData(null);
+    // window.location.reload();
     
   };
   const close = ()=>setMyData(false);
@@ -136,8 +144,12 @@ const ApplyForm = ({ visible, onClose, vacancy_id }) => {
               className="w-full bg-gray-200 rounded border-none mt-2 focus:ring-0 placeholder:text-xs"
               type="file"
               placeholder="Upload your CV"
-              onChange={handleFileChange}
+              onChange={handleFileChange} 
+     
             />
+              {errors.file && (
+              <span className="text-red-600">{errors.file}</span>
+            )}
           </div>
           <div className="p-2">
             <label>About Yourself</label>
@@ -150,10 +162,10 @@ const ApplyForm = ({ visible, onClose, vacancy_id }) => {
             />
           </div>
           <input type="hidden" name="" value={vacancy_id} />
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center ">
             <Button
               onClick={handleSubmit}
-              className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br"
+              className=" w-full mx-5 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br mb-5"
             >
               Submit
             </Button>

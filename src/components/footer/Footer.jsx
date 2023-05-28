@@ -6,6 +6,7 @@ import logo from "../../images/logo.png";
 const Footer = () => {
   const [lists, setLists] = useState([]);
   const [email, setEmail] = useState("");
+  const [myData, setMyData] = useState(null);
   useEffect(() => {
     const fetchSetting = async () => {
       try {
@@ -24,20 +25,28 @@ const Footer = () => {
     fetchSetting();
   }, []);
   function handleSubmit() {
-   
-      let data = { email };
-      fetch("https://pdeng.valleyhomecareservice.com/api/newsletter", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then((result) => {
-        console.warn("result", result);
-      });
-    
+    let data = { email };
+    fetch("https://pdeng.valleyhomecareservice.com/api/newsletter", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((result) => {
+      console.warn("result", result);
+    });
+    const success = "subscribed";
+    const storedMessage = sessionStorage.setItem(
+      "myData",
+      JSON.stringify(success)
+    );
+
+    const data1 = sessionStorage.getItem("myData");
+    setMyData(JSON.parse(data1));
+    console.log(myData);
   }
+  const close = () => setMyData(false);
   return (
     <>
       <div className="bg-[#050a30] p-10 mt-10">
@@ -54,11 +63,11 @@ const Footer = () => {
             ) : (
               <p>Loading img...</p>
             )}
-            <p className=" text-gray-400 flex text-justify text-sm md:text-lg">
+            {/* <p className=" text-gray-400 flex text-justify text-sm md:text-lg">
               {lists.meta_description}
-            </p>
+            </p> */}
           </div>
-          <div className="text-center mt-5">
+          <div className=" mt-5">
             <h3 className="text-md md:text-xl">Related Links</h3>
             <ul className="text-gray-400 text-sm md:text-lg">
               <li>
@@ -86,17 +95,19 @@ const Footer = () => {
                   Career
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/teams" className="hover:text-white">
+                  Teams
+                </NavLink>
+              </li>
             </ul>
           </div>
-          <div className="text-center mt-5">
+          <div className=" mt-5">
             <h3 className="text-sm md:text-xl">Contact Us</h3>
             <ul className="text-gray-400 text-lg">
-              <li>lorem</li>
-              <li>lorem</li>
-              <li>lorem</li>
-              <li>lorem</li>
-              <li>lorem</li>
-              <li>lorem</li>
+              <li>{lists.email}</li>
+              <li>{lists.phone_no}</li>
+              <li>{lists.address}</li>
             </ul>
           </div>
           <div>
@@ -120,12 +131,12 @@ const Footer = () => {
               </div>
               <h3 className="mt-5 text-sm md:text-xl">Newsletter Signup</h3>
               <input
-              className="w-full bg-black rounded border-none mt-2 focus:ring-0 placeholder:text-black"
-              type="text"
-              placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+                className="w-full bg-slate-500 rounded border-none mt-2 focus:ring-0 placeholder:text-black"
+                type="text"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <br />
               <Button
                 onClick={handleSubmit}
@@ -133,11 +144,23 @@ const Footer = () => {
               >
                 Submit
               </Button>
+              {myData && (
+                <div className="flex justify-between  bg-green-200 p-4 text-green-900 rounded w-full">
+                  <p className=" ">{myData} </p>
+                  <p
+                    onClick={close}
+                    title="dismiss"
+                    className="text-rose-500 text-2xl font-semibold cursor-pointer"
+                  >
+                    &times;
+                  </p>
+                </div>
+              )}
             </form>
           </div>
         </div>
         <hr />
-        <div className="text-white text-center mt-2">
+        <div className="text-white text-center pt-5">
           Edu KIT @ 2023- All right Reserved by Aaisa
         </div>
       </div>

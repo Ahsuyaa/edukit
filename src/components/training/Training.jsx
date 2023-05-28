@@ -87,9 +87,9 @@ const Training = () => {
                  {/* <span>duration={val.duration}</span> */}
                </div>
                 <div className="">
-                <NavLink to="/contact"><button className="w-[46%] bg-yellow-300 mr-1 h-8 font-semibold text-xs"> Send Query
+                <NavLink to="/contact"><button className="w-[46%] bg-blue-400  mr-1 h-8 font-semibold text-xs"> Send Query
                   </button></NavLink>
-                  <NavLink to="/admission"><button className="w-[46%] bg-blue-400 ml-1 h-8 font-semibold text-xs"> Get Admission</button></NavLink>
+                  <NavLink to="/admission"><button className="w-[46%] bg-yellow-300  ml-1 h-8 font-semibold text-xs"> Get Admission</button></NavLink>
                 </div>
               </div>
             </>
